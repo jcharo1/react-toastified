@@ -98,3 +98,15 @@
   height: 100%;
   width: 100%;
 } /*# sourceMappingURL=Toast.css.map */
+.toast-success {
+  background-color: #28a745;
+}
+.toast-error {
+  background-color: #dc3545;
+}
+.toast-warning {
+  background-color: #ffc107;
+}
+.toast-info {
+  background-color: #17a2b8;
+}
