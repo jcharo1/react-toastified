@@ -126,7 +126,3 @@ Feel free to contribute, raise issues, or suggest new features! Let's make this 
 ---
 
 Made with ❤️ by [Your Name]
-
-```
-
-```
