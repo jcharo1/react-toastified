@@ -8,7 +8,6 @@
   width: 400px;
   height: 300px;
   perspective: 1000px;
-  position: relative;
   color: currentColor;
 }
 .toast-container:hover .toast {
@@ -30,7 +29,9 @@
   transform: translateY(-260%) scale(1);
 }
 .toast {
-  position: absolute;
+  /* position: absolute; */
+  position: relative;
+
   bottom: 0;
   right: 0;
   opacity: 0;
