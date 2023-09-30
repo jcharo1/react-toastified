@@ -18,7 +18,7 @@ export const TOAST_TYPES = {
   INFO: "info",
 };
 
-function ToastItem({ toast, index, visibleToasts, removeToast }) {
+const ToastItem = ({ toast, index, visibleToasts, removeToast }) => {
   const [progress, setProgress] = useState(100);
 
   useEffect(() => {
@@ -40,9 +40,8 @@ function ToastItem({ toast, index, visibleToasts, removeToast }) {
   return (
     <div
       key={toast.id}
-      className={`toast toast-${index} ${
-        visibleToasts.includes(toast.id) ? "show" : ""
-      } toast-${toast.type}`}
+      className={`toast toast-${index} ${visibleToasts.includes(toast.id) ? "show" : ""
+        } toast-${toast.type}`}
     >
       {toast.duration && (
         <div className="progress-bar" style={{ width: `${progress}%` }}></div>
@@ -66,7 +65,7 @@ function ToastItem({ toast, index, visibleToasts, removeToast }) {
       </button>
     </div>
   );
-}
+};
 
 export const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
@@ -82,9 +81,12 @@ export const ToastProvider = ({ children }) => {
     }
   }, [toasts]);
 
-  const addToast = (message, options = {}) => {
-    const { type = TOAST_TYPES.INFO, style = {}, duration = null } = options;
-
+  const addToast = (
+    message,
+    type,
+    style = {},
+    duration = null
+  ) => {
     const id = new Date().getTime();
     setToasts([...toasts, { id, message, type, style, duration }]);
   };

@@ -18,7 +18,7 @@ export const TOAST_TYPES = {
   INFO: "info",
 };
 
-const ToastItem = ({ toast, index, visibleToasts, removeToast }) => {
+function ToastItem({ toast, index, visibleToasts, removeToast }) {
   const [progress, setProgress] = useState(100);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const ToastItem = ({ toast, index, visibleToasts, removeToast }) => {
       </button>
     </div>
   );
-};
+}
 
 export const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
@@ -82,12 +82,9 @@ export const ToastProvider = ({ children }) => {
     }
   }, [toasts]);
 
-  const addToast = (
-    message,
-    type = TOAST_TYPES.INFO,
-    style = {},
-    duration = null
-  ) => {
+  const addToast = (message, options = {}) => {
+    const { type = TOAST_TYPES.INFO, style = {}, duration = null } = options;
+
     const id = new Date().getTime();
     setToasts([...toasts, { id, message, type, style, duration }]);
   };
