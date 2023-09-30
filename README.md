@@ -35,11 +35,17 @@ yarn add react-toastified
 Firstly, wrap your root component with `ToastProvider`.
 
 ```jsx
+import App from "./App";
 import { ToastProvider } from "react-toastified";
 
-function App() {
-  return <ToastProvider>{/_ Your code here _/}</ToastProvider>;
-}
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <ToastProvider>
+      <App />
+    </ToastProvider>
+  </React.StrictMode>
+);
 ```
 
 Now, you can use the `useToast` hook to show toasts wherever you need them.
@@ -72,13 +78,13 @@ const handleClick = (type) => {
 };
 
 // For a success toast
-handleClick(TOAST_TYPES.SUCCESS);
+handleClick("success");
 
 // For an error toast
-handleClick(TOAST_TYPES.ERROR);
+handleClick("error");
 
 // For a warning toast
-handleClick(TOAST_TYPES.WARNING);
+handleClick("warning");
 ```
 
 ### Customize your Toast 🎨
@@ -87,12 +93,8 @@ Want to make your toast snazzier? Add some options!
 
 ```jsx
 addToast("This toast will disappear in 3 seconds!", {
-  type: TOAST_TYPES.SUCCESS,
+  type: "success",
   duration: 3000,
-});
-
-addToast("This is a red toast!", {
-  style: { backgroundColor: "red" },
 });
 ```
 
@@ -125,4 +127,4 @@ Feel free to contribute, raise issues, or suggest new features! Let's make this 
 
 ---
 
-Made with ❤️ by [Your Name]
+Made with ❤️ by [@jcharo]

@@ -47,7 +47,9 @@ function ToastItem({ toast, index, visibleToasts, removeToast }) {
       {toast.duration && (
         <div className="progress-bar" style={{ width: `${progress}%` }}></div>
       )}
-      <div className="message">{toast.message}</div>
+      <div className="message" style={{ position: "relative", zIndex: 2 }}>
+        {toast.message}
+      </div>
       <button onClick={() => removeToast(toast.id)}>
         <svg
           width="16"
