@@ -85,7 +85,8 @@ handleClick(TOAST_TYPES.ERROR);
 
 // For a warning toast
 handleClick(TOAST_TYPES.WARNING);
-\```
+
+````
 
 ### Customize your Toast 🎨
 
@@ -132,3 +133,4 @@ Feel free to contribute, raise issues, or suggest new features! Let's make this 
 ---
 
 Made with ❤️ by [Your Name]
+````
