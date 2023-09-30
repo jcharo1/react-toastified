@@ -29,8 +29,8 @@
   transform: translateY(-260%) scale(1);
 }
 .toast {
-  /* position: absolute; */
-  position: relative;
+  position: absolute;
+  /* position: relative; */
 
   bottom: 0;
   right: 0;
@@ -136,5 +136,9 @@
   position: absolute;
   bottom: 0;
   left: 0;
+  background-color: currentColor;
   z-index: 1; /* Make sure this is above the other elements but below text */
+}
+.message {
+  min-width: 420px;
 }
