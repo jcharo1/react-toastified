@@ -20,13 +20,13 @@ React-Toastified provides you with an easy-to-use, customizable, and efficient t
 
 ## Installation 📦
 
-\```bash
+```bash
 npm install react-toastified
 
 # or
 
 yarn add react-toastified
-\```
+```
 
 ---
 
@@ -34,17 +34,13 @@ yarn add react-toastified
 
 Firstly, wrap your root component with `ToastProvider`.
 
-\```jsx
-import { ToastProvider } from 'react-toastified';
+```jsx
+import { ToastProvider } from "react-toastified";
 
 function App() {
-return (
-<ToastProvider>
-{/_ Your code here _/}
-</ToastProvider>
-);
+  return <ToastProvider>{/_ Your code here _/}</ToastProvider>;
 }
-\```
+```
 
 Now, you can use the `useToast` hook to show toasts wherever you need them.
 
@@ -52,27 +48,25 @@ Now, you can use the `useToast` hook to show toasts wherever you need them.
 
 Here is how you can trigger a simple info toast:
 
-\```jsx
-import { useToast, TOAST_TYPES } from 'react-toastified';
+```jsx
+import { useToast, TOAST_TYPES } from "react-toastified";
 
 function MyComponent() {
-const { addToast } = useToast();
+  const { addToast } = useToast();
 
-const handleClick = () => {
-addToast("Hey there! This is an info toast.");
-};
+  const handleClick = () => {
+    addToast("Hey there! This is an info toast.");
+  };
 
-return (
-<button onClick={handleClick}>Show Toast</button>
-);
+  return <button onClick={handleClick}>Show Toast</button>;
 }
-\```
+```
 
 ### More Toast Types
 
 Need more than just info? We've got you covered! 🎨
 
-\```jsx
+```jsx
 const handleClick = (type) => {
   addToast(`This is a ${type} toast!`, { type });
 };
@@ -85,23 +79,22 @@ handleClick(TOAST_TYPES.ERROR);
 
 // For a warning toast
 handleClick(TOAST_TYPES.WARNING);
-
-````
+```
 
 ### Customize your Toast 🎨
 
 Want to make your toast snazzier? Add some options!
 
-\```jsx
+```jsx
 addToast("This toast will disappear in 3 seconds!", {
-type: TOAST_TYPES.SUCCESS,
-duration: 3000,
+  type: TOAST_TYPES.SUCCESS,
+  duration: 3000,
 });
 
 addToast("This is a red toast!", {
-style: { backgroundColor: 'red' },
+  style: { backgroundColor: "red" },
 });
-\```
+```
 
 ---
 
@@ -133,4 +126,7 @@ Feel free to contribute, raise issues, or suggest new features! Let's make this 
 ---
 
 Made with ❤️ by [Your Name]
-````
+
+```
+
+```
