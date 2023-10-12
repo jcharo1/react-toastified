@@ -55,7 +55,7 @@ Now, you can use the `useToast` hook to show toasts wherever you need them.
 Here is how you can trigger a simple info toast:
 
 ```jsx
-import { useToast, TOAST_TYPES } from "react-toastified";
+import { useToast } from "react-toastified";
 
 function MyComponent() {
   const { addToast } = useToast();
@@ -124,15 +124,16 @@ Here are the types you can use:
 To specify the type of your toast notification, simply pass the desired value to the `type` key in the options object when calling the toast function:
 
 ```javascript
-import { showToast } from "your-toast-notification-package";
+import { useToast } from "react-toastified";
 
+const { addToast } = useToast();
 // For a success message
-showToast("Operation completed successfully!", {
+addToast("Operation completed successfully!", {
   type: "success",
 });
 
 // For an error message
-showToast("Failed to fetch data.", {
+addToast("Failed to fetch data.", {
   type: "error",
 });
 
