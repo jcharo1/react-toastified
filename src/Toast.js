@@ -44,9 +44,9 @@ function ToastItem({ toast, index, visibleToasts, removeToast }) {
         visibleToasts.includes(toast.id) ? "show" : ""
       } toast-${toast.type}`}
     >
-      {toast.duration && (
+      {/* {toast.duration && (
         <div className="progress-bar" style={{ width: `${progress}%` }}></div>
-      )}
+      )} */}
       <div className="message" style={{ position: "relative", zIndex: 2 }}>
         {toast.message}
       </div>
