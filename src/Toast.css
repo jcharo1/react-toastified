@@ -51,6 +51,7 @@
   border-radius: 12px;
   max-height: 63px;
   background-color: #0072f4;
+  font-size: 1.6rem;
 }
 .toast.show {
   opacity: 1;

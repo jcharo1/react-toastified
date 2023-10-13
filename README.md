@@ -72,52 +72,29 @@ function MyComponent() {
 
 Need more than just info? We've got you covered! 🎨
 
-```jsx
-const handleClick = (type) => {
-  addToast(`This is a ${type} toast!`, { type });
-};
+````jsx
+function MyComponent() {
 
-// For a success toast
-handleClick("success");
+  const { addToast } = useToast();
 
-// For an error toast
-handleClick("error");
+  const toastTypes = ["info", "success", "error", "warning"];
 
-// For a warning toast
-handleClick("warning");
-```
+  const handleClick = () => {
+    // Display the toast based on the current type
+    addToast(`Hey there! This is a ${currentType} toast.`, {
+      type: currentType,
+    });
 
+    // Rotate to the next toast type for the next click
+    const nextTypeIndex =
+      (toastTypes.indexOf(currentType) + 1) % toastTypes.length;
+    setCurrentType(toastTypes[nextTypeIndex]);
+  };
+  return <button onClick={handleClick}>Show Toast</button>;
+}```
 ### Customize your Toast 🎨
 
 Want to make your toast snazzier? Add some options!
-
-## API 📖
-
-### `addToast(message, options?)`
-
-#### Parameters
-
-- `message` (String): The message to be displayed in the toast.
-- `options` (Object): Optional settings.
-  - `type` (String): Type of the toast. Default is `INFO`. -
-    export const TOAST_TYPES = {
-
-## `type` Option in Toast Notification
-
-When you're using our React toast notification package, you have the flexibility to customize the appearance and behavior of your toast notifications. One of the keys available in the options object is `type`.
-
-### What is the `type` Option?
-
-The `type` option determines the visual theme and intent of the toast notification. Depending on the context of the message you want to convey to the user, you can choose among various predefined types.
-
-### Available Types
-
-Here are the types you can use:
-
-- **`success`**: Use this type when you want to notify the user of a successful operation or task completion. This typically displays the toast in a green theme.
-- **`error`**: This type is ideal for conveying errors or failures in operations. It commonly comes with a red theme to indicate the severity.
-- **`warning`**: Opt for this type when you want to warn the user about potential issues or require their attention for specific matters. It's generally represented in a yellow theme.
-- **`info`**: This type is for general informational messages. It might have a blue or neutral theme to represent non-critical information.
 
 ### How to Use
 
@@ -138,7 +115,7 @@ addToast("Failed to fetch data.", {
 });
 
 // And so on for "warning" and "info"
-```
+````
 
 ---
 
