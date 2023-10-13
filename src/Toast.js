@@ -152,7 +152,7 @@ export const ToastProvider = ({ children }) => {
       ]);
     }
   };
-  const position = options.position || "bottom-right";
+
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
