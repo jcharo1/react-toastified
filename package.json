@@ -1,6 +1,6 @@
 {
   "name": "react-toastified",
-  "version": "1.1.11",
+  "version": "1.1.13",
   "description": "An easy-to-use, customizable toast notification system for React apps",
   "main": "dist/index.js",
   "scripts": {

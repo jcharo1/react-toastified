@@ -21,30 +21,47 @@ export const TOAST_TYPES = {
 function ToastItem({ toast, index, visibleToasts, removeToast }) {
   // const [progress, setProgress] = useState(100);
 
+  // useEffect(() => {
+  //   if (toast.duration) {
+  //     const startTime = new Date().getTime();
+  //     const interval = setInterval(() => {
+  //       const elapsedTime = new Date().getTime() - startTime;
+  //       const remainingTime = toast.duration - elapsedTime;
+  //       // setProgress((remainingTime / toast.duration) * 100);
+  //       if (remainingTime <= 0) {
+  //         clearInterval(interval);
+  //         removeToast(toast.id);
+  //       }
+  //     }, 100);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [toast, removeToast]);
+  const [isFadingOut, setIsFadingOut] = useState(false);
+
   useEffect(() => {
     if (toast.duration) {
       const startTime = new Date().getTime();
       const interval = setInterval(() => {
         const elapsedTime = new Date().getTime() - startTime;
         const remainingTime = toast.duration - elapsedTime;
-        // setProgress((remainingTime / toast.duration) * 100);
         if (remainingTime <= 0) {
           clearInterval(interval);
-          removeToast(toast.id);
+          setIsFadingOut(true);
+          setTimeout(() => {
+            removeToast(toast.id);
+          }, 500); // 500ms to match the fade-out duration in the CSS
         }
       }, 100);
       return () => clearInterval(interval);
     }
   }, [toast, removeToast]);
 
+  const cssClasses = `toast toast-${index} ${
+    visibleToasts.includes(toast.id) ? "show" : ""
+  } ${isFadingOut ? "fade-out" : ""} toast-${toast.type}`;
+
   return (
-    <div
-      key={toast.id}
-      className={`toast toast-${index} ${
-        visibleToasts.includes(toast.id) ? "show" : ""
-      } toast-${toast.type}`}
-      style={toast.style}
-    >
+    <div key={toast.id} className={cssClasses} style={toast.style}>
       {/* {toast.duration && (
         <div className="progress-bar" style={{ width: `${progress}%` }}></div>
       )} */}

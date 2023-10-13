@@ -9,6 +9,7 @@
   height: 300px;
   perspective: 1000px;
   color: currentColor;
+  transition: opacity 0.5s ease-in-out;
 }
 .toast-container:hover .toast {
   transform: translateY(0);
@@ -28,6 +29,7 @@
   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1);
   transform: translateY(-260%) scale(1);
 }
+
 .toast {
   position: absolute;
   /* position: relative; */
@@ -139,4 +141,8 @@
   left: 0;
   background-color: red;
   z-index: 1; /* Make sure this is above the other elements but below text */
+}
+.toast.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
