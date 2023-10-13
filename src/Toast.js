@@ -19,7 +19,7 @@ export const TOAST_TYPES = {
 };
 
 function ToastItem({ toast, index, visibleToasts, removeToast }) {
-  const [progress, setProgress] = useState(100);
+  // const [progress, setProgress] = useState(100);
 
   useEffect(() => {
     if (toast.duration) {
@@ -27,7 +27,7 @@ function ToastItem({ toast, index, visibleToasts, removeToast }) {
       const interval = setInterval(() => {
         const elapsedTime = new Date().getTime() - startTime;
         const remainingTime = toast.duration - elapsedTime;
-        setProgress((remainingTime / toast.duration) * 100);
+        // setProgress((remainingTime / toast.duration) * 100);
         if (remainingTime <= 0) {
           clearInterval(interval);
           removeToast(toast.id);
@@ -43,6 +43,7 @@ function ToastItem({ toast, index, visibleToasts, removeToast }) {
       className={`toast toast-${index} ${
         visibleToasts.includes(toast.id) ? "show" : ""
       } toast-${toast.type}`}
+      style={toast.style}
     >
       {/* {toast.duration && (
         <div className="progress-bar" style={{ width: `${progress}%` }}></div>
