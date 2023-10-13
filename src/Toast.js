@@ -101,17 +101,17 @@ export const ToastProvider = ({ children }) => {
     "top-right",
   ];
 
-  const validateAndSetPosition = (position, setToastContainerPosition) => {
-    if (validPositions.includes(position)) {
-      setToastContainerPosition(position); // Replace this with your actual function to set position
-    } else {
-      throw new Error(
-        `Invalid position value. Allowed values are: ${validPositions.join(
-          ", "
-        )}`
-      );
-    }
-  };
+  // const validateAndSetPosition = (position, setToastContainerPosition) => {
+  //   if (validPositions.includes(position)) {
+  //     setToastContainerPosition(position); // Replace this with your actual function to set position
+  //   } else {
+  //     throw new Error(
+  //       `Invalid position value. Allowed values are: ${validPositions.join(
+  //         ", "
+  //       )}`
+  //     );
+  //   }
+  // };
   useEffect(() => {
     if (toasts.length > 3) {
       setQueue(toasts.slice(0, -3));
@@ -126,11 +126,12 @@ export const ToastProvider = ({ children }) => {
       type = TOAST_TYPES.INFO,
       style = {},
       duration = null,
-      position = "bottom-right",
+      position,
     } = options;
     try {
       if (position) {
-        validateAndSetPosition(position, setToastContainerPosition);
+        setToastContainerPosition(position);
+        // validateAndSetPosition(position, setToastContainerPosition);
       }
     } catch (error) {
       console.error(error.message);
@@ -156,7 +157,7 @@ export const ToastProvider = ({ children }) => {
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
-      <div className={`toast-container ${position}`}>
+      <div className={`toast-container ${toastContainerPosition}`}>
         {[...toasts].reverse().map((toast, index) => (
           <ToastItem
             key={toast.id}

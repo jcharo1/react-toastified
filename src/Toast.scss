@@ -5,11 +5,19 @@
   bottom: 20px;
   right: 20px;
   z-index: 9999;
-  width: 400px;
-  height: 300px;
+
   perspective: 1000px;
   color: currentColor;
   transition: opacity 0.5s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
 }
 .toast-container:hover .toast {
   transform: translateY(0);
