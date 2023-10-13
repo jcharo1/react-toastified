@@ -1,38 +1,46 @@
-# React-Toastified 🍞✨
+[![npm](https://img.shields.io/npm/v/react-toastified)](https://www.npmjs.com/package/react-toastified)
+[![Made by Justin Charo](https://img.shields.io/badge/Made%20by-Justin%20Charo-blue)](https://justin.charo.gg/)
+[![npm version](https://badge.fury.io/js/react-toastified.svg)](https://badge.fury.io/js/react-toastified)
+![npm](https://img.shields.io/npm/dm/react-toastified)
+![NPM](https://img.shields.io/npm/l/react-toastified)
 
-Light up your React app with snazzy notifications!
+# 🍞✨ React-Toastified — Get Your Notifications Toasty!
 
----
-
-## Introduction 🚀
-
-React-Toastified provides you with an easy-to-use, customizable, and efficient toast notification system. No fuss, just toasts. Keep your users informed in style.
-
----
-
-## Features 🔥
-
-- **Four Toast Types**: Success 🎉, Error 😢, Warning ⚠️, and Info ℹ️.
-- **Customizable**: Tailor your toasts with custom styles, durations, and more.
-- **Easy to Implement**: Integrate seamlessly with any React application.
+Elevate the UX of your React apps with toasts that are as informative as they are delicious.
 
 ---
 
-## Installation 📦
+## 🚀 Quick Intro
+
+Why settle for boring alerts when you can have toast? React-Toastified serves up a feast of eye-catching notifications with zero hassle. More style, less stress. Let's get toasting! 🥂
+
+---
+
+## 🔥 What’s Cooking?
+
+- 🎉 **Flavorsome Toast Types**: Success, Error, Warning, and Info.
+- 👔 **Tailor-Made**: Spice up your toasts with custom styles, durations, and more.
+- 🛠️ **Plug 'n' Play**: Pairs perfectly with any React dish.
+
+---
+
+## 📦 Pantry Essentials (Installation)
+
+You can add this package to your project using npm or yarn:
 
 ```bash
 npm install react-toastified
 
-# or
+# or if you're a yarn fan
 
 yarn add react-toastified
 ```
 
 ---
 
-## How to Use 🛠️
+## 🛠️ Cooking Time (Usage)
 
-Firstly, wrap your root component with `ToastProvider`.
+Before cooking up some toasts, wrap your root component in `ToastProvider`.
 
 ```jsx
 import App from "./App";
@@ -48,11 +56,9 @@ root.render(
 );
 ```
 
-Now, you can use the `useToast` hook to show toasts wherever you need them.
+### 🍞 Basic Toast Recipe
 
-### Basic Example
-
-Here is how you can trigger a simple info toast:
+Triggering a simple info toast is as easy as pie!
 
 ```jsx
 import { useToast } from "react-toastified";
@@ -61,76 +67,80 @@ function MyComponent() {
   const { addToast } = useToast();
 
   const handleClick = () => {
-    addToast("Hey there! This is an info toast.");
+    addToast("Hey, check this out! Info toast, coming right up!");
   };
 
-  return <button onClick={handleClick}>Show Toast</button>;
+  return <button onClick={handleClick}>Serve Toast</button>;
 }
 ```
 
-### More Toast Types
+### 🌈 Rainbow of Toasts
 
-Need more than just info? We've got you covered! 🎨
+Why stick to one flavor when you can have them all? 🌈
 
-````jsx
+```jsx
 function MyComponent() {
-
   const { addToast } = useToast();
-
   const toastTypes = ["info", "success", "error", "warning"];
 
-  const handleClick = () => {
-    // Display the toast based on the current type
-    addToast(`Hey there! This is a ${currentType} toast.`, {
-      type: currentType,
+  const handleClick = (type) => {
+    addToast(`A fresh ${type} toast, just for you!`, {
+      type,
+      style: {
+        color: "black",
+        // backgroundColor: "pink", // Add some flair with custom styles
+        // padding: "24px"
+      },
     });
-
-    // Rotate to the next toast type for the next click
-    const nextTypeIndex =
-      (toastTypes.indexOf(currentType) + 1) % toastTypes.length;
-    setCurrentType(toastTypes[nextTypeIndex]);
   };
-  return <button onClick={handleClick}>Show Toast</button>;
-}```
-### Customize your Toast 🎨
 
-Want to make your toast snazzier? Add some options!
+  return (
+    <>
+      {toastTypes.map((type) => (
+        <button onClick={() => handleClick(type)}>Serve {type} Toast</button>
+      ))}
+    </>
+  );
+}
+```
 
-### How to Use
+### 🎨 Garnish Your Toast
 
-To specify the type of your toast notification, simply pass the desired value to the `type` key in the options object when calling the toast function:
+Add some jazz to your toasts with custom options.
 
 ```javascript
 import { useToast } from "react-toastified";
 
 const { addToast } = useToast();
-// For a success message
-addToast("Operation completed successfully!", {
-  type: "success",
-});
-
-// For an error message
-addToast("Failed to fetch data.", {
-  type: "error",
-});
-
-// And so on for "warning" and "info"
-````
+addToast("Yay! You did it!", { type: "success" });
+addToast("Oops! Something went wrong.", { type: "error" });
+```
 
 ---
 
-## Future Plans 🌈
+## 🌈 Coming Up Next!
 
-- Support for action buttons in toasts
-- More customization options
-
----
-
-## Contributions 🤝
-
-Feel free to contribute, raise issues, or suggest new features! Let's make this the best toast package out there!
+- 🚀 Action buttons for your toasts
+- 🎨 Even more ways to customize
 
 ---
 
-Made with ❤️ by [@jcharo]
-Inspired by Vercel Notification
+## 🤝 Share Your Recipes (Contributions)
+
+If you’ve got some zesty ideas, we’re all ears! Issue reports, feature requests, and contributions are always welcome. Let's make some toast magic together!
+
+---
+
+💌 Lovingly baked by [@jcharo], seasoned with inspiration from Vercel Notification.
+
+## Also Check Out My Other Package 🌟
+
+Interested in displaying GitHub activity in a stylish calendar format within your React apps? Check out my other package, **React GitHub Activity Calendar**!
+
+- **NPM**: [React GitHub Activity Calendar on NPM](https://www.npmjs.com/package/react-github-activity-calendar)
+- **Portfolio**: [View on my Portfolio](https://justin.charo.gg/)
+- **GitHub**: [@jcharo1](https://www.github.com/jcharo1)
+
+![React GitHub Activity Calendar Screenshot](https://github.com/jcharo1/react-github-activity-calendar/blob/main/github.png)
+
+It's a simple and customizable React component for showing GitHub activity. To learn more about how to use it and integrate it into your projects, head over to the [official documentation](https://www.npmjs.com/package/react-github-activity-calendar).

@@ -1,16 +1,35 @@
 {
   "name": "react-toastified",
-  "version": "1.1.9",
-  "description": "",
+  "version": "1.1.11",
+  "description": "An easy-to-use, customizable toast notification system for React apps",
   "main": "dist/index.js",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development",
-    "compile-sass": "sass --style=compressed ./src/Toast.scss:./dist/Toast.css"
+    "compile-sass": "sass --style=compressed ./src/Toast.scss:./dist/Toast.css",
+    "test": "jest"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "react",
+    "toast",
+    "notification",
+    "react-toastified",
+    "snackbar",
+    "alert",
+    "message",
+    "popup",
+    "feedback"
+  ],
+  "author": "Justin Charo",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jcharo1/react-toastified.git"
+  },
+  "homepage": "https://github.com/jcharo1/react-toastified#readme",
+  "bugs": {
+    "url": "https://github.com/jcharo1/react-toastified/issues"
+  },
   "peerDependencies": {
     "react": "^18.2.0"
   },
