@@ -146,3 +146,23 @@
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
+
+.toast-container.bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+
+.toast-container.bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+
+.toast-container.top-left {
+  top: 20px;
+  left: 20px;
+}
+
+.toast-container.top-right {
+  top: 20px;
+  right: 20px;
+}

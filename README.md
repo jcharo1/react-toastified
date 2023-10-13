@@ -86,6 +86,7 @@ function MyComponent() {
   const handleClick = (type) => {
     addToast(`A fresh ${type} toast, just for you!`, {
       type,
+      position:"bottom-right" // Default is bottom-right , full list of position arguments  are ['bottom-right', 'bottom-left', 'top-left', 'top-right']
       style: {
         color: "black",
         // backgroundColor: "pink", // Add some flair with custom styles

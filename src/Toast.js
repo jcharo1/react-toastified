@@ -92,7 +92,26 @@ export const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
   const [visibleToasts, setVisibleToasts] = useState([]);
   const [queue, setQueue] = useState([]);
+  const [toastContainerPosition, setToastContainerPosition] =
+    useState("bottom-right");
+  const validPositions = [
+    "bottom-right",
+    "bottom-left",
+    "top-left",
+    "top-right",
+  ];
 
+  const validateAndSetPosition = (position, setToastContainerPosition) => {
+    if (validPositions.includes(position)) {
+      setToastContainerPosition(position); // Replace this with your actual function to set position
+    } else {
+      throw new Error(
+        `Invalid position value. Allowed values are: ${validPositions.join(
+          ", "
+        )}`
+      );
+    }
+  };
   useEffect(() => {
     if (toasts.length > 3) {
       setQueue(toasts.slice(0, -3));
@@ -103,7 +122,19 @@ export const ToastProvider = ({ children }) => {
   }, [toasts]);
 
   const addToast = (message, options = {}) => {
-    const { type = TOAST_TYPES.INFO, style = {}, duration = null } = options;
+    const {
+      type = TOAST_TYPES.INFO,
+      style = {},
+      duration = null,
+      position,
+    } = options;
+    try {
+      if (position) {
+        validateAndSetPosition(position, setToastContainerPosition);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
 
     const id = new Date().getTime();
     setToasts([...toasts, { id, message, type, style, duration }]);
@@ -121,11 +152,11 @@ export const ToastProvider = ({ children }) => {
       ]);
     }
   };
-
+  const position = options.position || "bottom-right";
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
-      <div className="toast-container">
+      <div className={`toast-container ${position}`}>
         {[...toasts].reverse().map((toast, index) => (
           <ToastItem
             key={toast.id}
