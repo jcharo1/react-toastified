@@ -126,7 +126,7 @@ export const ToastProvider = ({ children }) => {
       type = TOAST_TYPES.INFO,
       style = {},
       duration = null,
-      position,
+      position = "bottom-right",
     } = options;
     try {
       if (position) {
