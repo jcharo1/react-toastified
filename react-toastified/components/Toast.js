@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import "../styles/Toast.css";
 const ToastContext = createContext();
+// import "./styles/Toast.css";
 
 export const useToast = () => {
   const context = useContext(ToastContext);
@@ -18,25 +18,7 @@ export const TOAST_TYPES = {
 };
 
 function ToastItem({ toast, index, visibleToasts, removeToast }) {
-  // const [progress, setProgress] = useState(100);
-
-  // useEffect(() => {
-  //   if (toast.duration) {
-  //     const startTime = new Date().getTime();
-  //     const interval = setInterval(() => {
-  //       const elapsedTime = new Date().getTime() - startTime;
-  //       const remainingTime = toast.duration - elapsedTime;
-  //       // setProgress((remainingTime / toast.duration) * 100);
-  //       if (remainingTime <= 0) {
-  //         clearInterval(interval);
-  //         removeToast(toast.id);
-  //       }
-  //     }, 100);
-  //     return () => clearInterval(interval);
-  //   }
-  // }, [toast, removeToast]);
-  const [isFadingOut, setIsFadingOut] = useState(false);
-
+  const { toasts, setToasts } = useToast();
   useEffect(() => {
     if (toast.duration) {
       const startTime = new Date().getTime();
@@ -45,26 +27,24 @@ function ToastItem({ toast, index, visibleToasts, removeToast }) {
         const remainingTime = toast.duration - elapsedTime;
         if (remainingTime <= 0) {
           clearInterval(interval);
-          setIsFadingOut(true);
-          setTimeout(() => {
-            removeToast(toast.id);
-          }, 500); // 500ms to match the fade-out duration in the CSS
+          removeToast(toast.id);
         }
       }, 100);
+
       return () => clearInterval(interval);
     }
   }, [toast, removeToast]);
 
   const cssClasses = `toast toast-${index} ${
     visibleToasts.includes(toast.id) ? "show" : ""
-  } ${isFadingOut ? "fade-out" : ""} toast-${toast.type}`;
+  } ${toast.isFadingOut ? "fade-out" : ""} toast-${toast.type}`;
 
   return (
     <div key={toast.id} className={cssClasses} style={toast.style}>
       {/* {toast.duration && (
         <div className="progress-bar" style={{ width: `${progress}%` }}></div>
       )} */}
-      <div className="message" style={{ position: "relative", zIndex: 2 }}>
+      <div className={`message`} style={{ position: "relative", zIndex: 2 }}>
         {toast.message}
       </div>
       <button onClick={() => removeToast(toast.id)}>
@@ -137,24 +117,30 @@ export const ToastProvider = ({ children }) => {
     }
 
     const id = new Date().getTime();
-    setToasts([...toasts, { id, message, type, style, duration }]);
+    setToasts([
+      ...toasts,
+      { id, message, type, style, duration, isFadingOut: false },
+    ]);
   };
-
   const removeToast = (id) => {
-    setToasts(toasts.filter((toast) => toast.id !== id));
+    setIsFadingOut((prevState) => ({ ...prevState, [id]: true }));
 
-    if (queue.length > 0) {
-      const nextToast = queue[0];
-      setQueue(queue.slice(1));
-      setVisibleToasts((prevVisibleToasts) => [
-        ...prevVisibleToasts,
-        nextToast.id,
-      ]);
-    }
+    setTimeout(() => {
+      setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
+
+      if (queue.length > 0) {
+        const nextToast = queue[0];
+        setQueue((prevQueue) => prevQueue.slice(1));
+        setVisibleToasts((prevVisibleToasts) => [
+          ...prevVisibleToasts,
+          nextToast.id,
+        ]);
+      }
+    }, 500); // Wait for 500ms to match the fade-out duration in the CSS
   };
 
   return (
-    <ToastContext.Provider value={{ addToast, removeToast }}>
+    <ToastContext.Provider value={{ addToast, removeToast, setToasts, toasts }}>
       {children}
       <div className={`toast-container ${toastContainerPosition}`}>
         {[...toasts].reverse().map((toast, index) => (

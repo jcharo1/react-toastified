@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare-package": "mkdir npm-package && cp -r components npm-package/components && cp -r styles npm-package/styles && terser ./components/Toast.js.js -o ./npm-package/components/Toast.min.js && postcss ./styles/Toast.css -o ./npm-package/styles/Toast.min.css"
+    "prepare-package": "mkdir -p npm-package/components && mkdir -p npm-package/styles && cp -r ./components/* npm-package/components/ && cp styles/globals.css npm-package/styles/globals.css && babel ./components/Toast.js --out-file ./npm-package/components/Toast.transpiled.js && terser ./npm-package/components/Toast.transpiled.js -o ./npm-package/components/Toast.min.js && postcss ./styles/globals.css -o ./npm-package/styles/globals.min.css"
   },
   "keywords": [
     "react",
@@ -34,11 +34,12 @@
     "url": "https://github.com/jcharo1/react-toastified/issues"
   },
   "dependencies": {
-    "next": "^13.5.4",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/preset-react": "^7.22.15",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -46,6 +47,7 @@
     "cssnano": "^6.0.1",
     "eslint": "^8",
     "eslint-config-next": "13.5.4",
+    "next": "^13.5.4",
     "postcss": "^8",
     "postcss-cli": "^10.1.0",
     "tailwindcss": "^3",
