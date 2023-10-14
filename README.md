@@ -12,15 +12,17 @@ Elevate the UX of your React apps with toasts that are as informative as they ar
 
 ## 🚀 Quick Intro
 
-Why settle for boring alerts when you can have toast? React-Toastified serves up a feast of eye-catching notifications with zero hassle. More style, less stress. Let's get toasting! 🥂
+Why settle for boring alerts when you can have toast? React-Toastified serves up a feast of eye-catching notifications with zero hassle. Hover over and feel the warmth of our interactive toasts. More style, less stress. Let's get toastified! 🥂
 
 ---
 
 ## 🔥 What’s Cooking?
 
 - 🎉 **Flavorsome Toast Types**: Success, Error, Warning, and Info.
+-  🌌 Hover & Glow: Experience the magical hover effect that makes your notifications pop!
 - 👔 **Tailor-Made**: Spice up your toasts with custom styles, durations, and more.
 - 🛠️ **Plug 'n' Play**: Pairs perfectly with any React dish.
+
 
 ---
 
