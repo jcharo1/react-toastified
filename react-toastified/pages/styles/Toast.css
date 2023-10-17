@@ -1,11 +1,26 @@
 .toast-container {
   position: fixed;
+  width: auto;
+  height: auto;
   bottom: 20px;
   right: 20px;
   z-index: 9999;
+
   perspective: 1000px;
   color: currentColor;
   transition: opacity 0.5s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+}
+.toast-container:hover {
+  pointer-events: auto;
 }
 .toast-container:hover .toast {
   transform: translateY(0);
@@ -126,6 +141,10 @@
   background-color: red;
   z-index: 1; /* Make sure this is above the other elements but below text */
 }
+.toast.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
 
 .toast-container.bottom-right {
   bottom: 20px;
@@ -145,12 +164,4 @@
 .toast-container.top-right {
   top: 20px;
   right: 20px;
-}
-.fade-out {
-  animation: react-toastified-fadeOut 0.5s ease-in-out forwards;
-}
-@keyframes react-toastified-fadeOut {
-  to {
-    opacity: 0;
-  }
 }
