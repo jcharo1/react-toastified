@@ -1,14 +1,24 @@
 {
   "name": "react-toastified",
-  "version": "1.3.4",
+  "version": "1.3.7",
   "description": "An easy-to-use, customizable toast notification system for React apps",
-  "main": "./components/Toast.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development",
     "compile-sass": "sass --style=compressed ./src/Toast.scss:./dist/Toast.css",
     "test": "jest"
   },
+  "files": [
+    "src/Toast.js",
+    "src/index.js",
+    "src/Toast.css",
+    "dist/",
+    "dist/index.js",
+    "dist/*.css",
+    "package.json",
+    "README.md"
+  ],
   "keywords": [
     "react",
     "toast",
