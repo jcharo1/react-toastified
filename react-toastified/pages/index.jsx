@@ -12,10 +12,12 @@ export default function DevelopmentComponent() {
 
   const tryToast = () => {
     console.log("tryToast")
-    addToast(`This is a ${toastType} toast!`, { type: toastType, position: "bottom-right", duration: 1000, style: { fontSize: "1.2rem" } });
+    addToast(`This is a ${toastType} toast!`, { type: toastType, position: "bottom-right", duration: 5000, style: { fontSize: "1.2rem" } });
   };
   return (
-    <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 p-10 bg-slate-500 h-screen ">
+
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 p-10 bg-slate-500 h-[400vh] ">
+
       <h1 className="sr-only">Page title</h1>
       {/* Main 3 column grid */}
       <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8">

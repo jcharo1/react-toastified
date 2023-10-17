@@ -10,8 +10,6 @@
   perspective: 1000px;
   color: currentColor;
   transition: opacity 0.5s ease-in-out;
-  width: 400px;
-  height: 300px;
 }
 .toast-container:hover .toast {
   transform: translateY(0);
@@ -132,9 +130,7 @@
   background-color: red;
   z-index: 1; /* Make sure this is above the other elements but below text */
 }
-.toast.fade-out {
-  animation: react-toastified-fadeOut 0.5s ease-in-out backwards;
-}
+
 .toast-container.bottom-right {
   bottom: 20px;
   right: 20px;
@@ -154,7 +150,9 @@
   top: 20px;
   right: 20px;
 }
-
+.fade-out {
+  animation: react-toastified-fadeOut 0.5s ease-in-out forwards;
+}
 @keyframes react-toastified-fadeOut {
   to {
     opacity: 0;

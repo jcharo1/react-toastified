@@ -19,6 +19,9 @@
   z-index: 9999;
   pointer-events: none;
 }
+.toast-container:hover {
+  pointer-events: auto;
+}
 .toast-container:hover .toast {
   transform: translateY(0);
 }
