@@ -255,11 +255,11 @@
   z-index: 3;
   transform: translateY(260%) scale(1);
 }
-.toastified-rainbow-gradient-border {
+/* .toastified-rainbow-gradient-border {
   position: relative;
   /* z-index: 1; */
-}
-
+/* } */
+/* 
 .toastified-rainbow-gradient-border::before {
   content: "";
   position: absolute;
@@ -271,11 +271,75 @@
 
   z-index: -1;
   background: linear-gradient(transparent, transparent),
-    /* Inner background */
-      linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet); /* Gradient border */
+      linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet); 
   background-clip: padding-box, border-box;
 
-  /* Adjust border width here */
   border: 4px solid transparent;
   box-sizing: border-box;
+}  */
+
+/* /// new class names */
+
+.toast-default {
+  background-color: #555555;
+}
+
+/* Success - Original */
+.toast-success {
+  background-color: #00ffaa;
+}
+
+/* Error - Original */
+.toast-error {
+  background-color: #ff4560;
+}
+
+/* Warning - Original */
+.toast-warning {
+  background-color: #ffaa44;
+}
+
+/* Info - Original */
+.toast-info {
+  background-color: #00ffff;
+}
+
+/* Success - First Variation */
+.toast-success-variation1 {
+  background-color: #008000; /* Dark Green */
+}
+
+/* Error - First Variation */
+.toast-error-variation1 {
+  background-color: #8b0000; /* Dark Red */
+}
+
+/* Warning - First Variation */
+.toast-warning-variation1 {
+  background-color: #daa520; /* Goldenrod */
+}
+
+/* Info - First Variation */
+.toast-info-variation1 {
+  background-color: #000080; /* Navy */
+}
+
+/* Success - Second Variation */
+.toast-success-variation2 {
+  background-color: #adff2f; /* Green Yellow */
+}
+
+/* Error - Second Variation */
+.toast-error-variation2 {
+  background-color: #ff69b4; /* Hot Pink */
+}
+
+/* Warning - Second Variation */
+.toast-warning-variation2 {
+  background-color: #ffd700; /* Gold */
+}
+
+/* Info - Second Variation */
+.toast-info-variation2 {
+  background-color: #4682b4; /* Steel Blue */
 }

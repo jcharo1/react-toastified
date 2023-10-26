@@ -17,13 +17,7 @@ export const TOAST_TYPES = {
   INFO: "info",
 };
 
-function ToastItem({
-  toast,
-  index,
-  visibleToasts,
-  removeToast,
-  isOnCloseEffect,
-}) {
+function ToastItem({ toast, index, visibleToasts, removeToast }) {
   useEffect(() => {
     if (toast.duration) {
       const startTime = new Date().getTime();
@@ -39,17 +33,38 @@ function ToastItem({
       return () => clearInterval(interval);
     }
   }, [toast, removeToast]);
-  useEffect(() => {
-    console.log("isOnCloseEffect");
-    console.log(isOnCloseEffect);
-  }, [isOnCloseEffect]);
+
   const cssClasses = `toast toast-${index} ${
     visibleToasts.includes(toast.id) ? "show" : ""
-  } ${toast.isFadingOut ? "fade-out" : ""} toast-${toast.type} ${
+  } ${toast.isFadingOut ? "fade-out" : ""} ${getToastClass(toast.type, 1)} ${
     toast.rtl ? "toastifed-rtl" : "toastifed-ltr"
-  } ${isOnCloseEffect ? isOnCloseEffect : ""}
-  `.trim();
+  } `.trim();
+  function getToastClass(type, variation = "default") {
+    let baseClass = "toast-";
 
+    switch (type) {
+      case "success":
+        baseClass += "success";
+        break;
+      case "error":
+        baseClass += "error";
+        break;
+      case "warning":
+        baseClass += "warning";
+        break;
+      case "info":
+        baseClass += "info";
+        break;
+      default:
+        return "Invalid type";
+    }
+
+    if (variation !== "default") {
+      baseClass += `-variation${variation}`;
+    }
+
+    return baseClass;
+  }
   return (
     <div key={toast.id} className={cssClasses} style={toast.style}>
       {/* {toast.duration && (
@@ -121,7 +136,7 @@ export const ToastProvider = ({ children }) => {
       duration = null,
       position,
       rtl = false,
-      onCloseEffect = false,
+      colorVariation = null,
     } = options;
     try {
       if (position) {
@@ -143,27 +158,13 @@ export const ToastProvider = ({ children }) => {
         duration,
         isFadingOut: false,
         rtl,
-        onCloseEffect,
+        colorVariation,
       },
     ]);
   };
-  const handleonCloseLeaveEffectClassName = (onCloseEffect) => {
-    switch (onCloseEffect) {
-      case "rotateOut":
-        return "rotate-fade-out";
-      case "zoomIn":
-        return "zoom-in";
-      case "slideUp":
-        return "slide-fade-out-up";
-      case "slideDown":
-        return "slide-fade-out-down";
-      default:
-        return "";
-    }
-  };
   const removeToast = (id) => {
     console.log("removeToast");
-    console.log(id);
+    // console.log(id);
     // Mark the toast for removal (setting isFadingOut property to true)
     setToasts((prevToasts) => {
       return prevToasts.map((toast) => {
@@ -171,14 +172,26 @@ export const ToastProvider = ({ children }) => {
           return {
             ...toast,
             isFadingOut: true,
-            isOnCloseEffect: toast.onCloseEffect,
           };
         } else {
           return toast;
         }
       });
     });
-
+    const handleonCloseLeaveEffectClassName = (onCloseEffect) => {
+      switch (onCloseEffect) {
+        case "rotateOut":
+          return "rotate-fade-out";
+        case "zoomIn":
+          return "zoom-in";
+        case "slideUp":
+          return "slide-fade-out-up";
+        case "slideDown":
+          return "slide-fade-out-down";
+        default:
+          return "";
+      }
+    };
     setTimeout(() => {
       // Remove the toast after the animation duration
       setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));

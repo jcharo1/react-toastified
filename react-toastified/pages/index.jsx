@@ -19,8 +19,9 @@ export default function DevelopmentComponent() {
     addToast(`This is a ${toastType} toast  number ${count}!`, {
       type: toastType,
       rtl: false,
-      onCloseEffect: "slideDown",
-      position: " center-top",
+      onCloseEffect: "rotateOut",
+      position: " bottom-right",
+
       style: { fontSize: "1.2rem" },
     });
   };
