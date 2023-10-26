@@ -1,11 +1,10 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
 .toast-container {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  width: 320px;
+  padding: 4px;
   z-index: 9999;
   perspective: 1000px;
   color: currentColor;
@@ -29,11 +28,8 @@
   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1);
   transform: translateY(-260%) scale(1);
 }
-
 .toast {
   position: absolute;
-  /* position: relative; */
-
   bottom: 0;
   right: 0;
   opacity: 0;
@@ -47,8 +43,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  line-height: 21px;
+  /* line-height: 21px; */
   padding: 16px;
   border-radius: 12px;
   max-height: 63px;
@@ -102,59 +97,117 @@
 .test-container-pages {
   height: 100%;
   width: 100%;
-} /*# sourceMappingURL=Toast.css.map */
-
-.toast-success {
-  background-color: #00ffaa;
 }
-
-/* Error - A more aqua-like red */
+.toast-success {
+  background-color: #0fa;
+}
 .toast-error {
   background-color: #ff4560;
 }
-
-/* Warning - An aqua-like orange */
 .toast-warning {
-  background-color: #ffaa44;
+  background-color: #fa4;
 }
-
-/* Info - Keeping it as aqua */
 .toast-info {
-  background-color: #00ffff;
+  background-color: aqua;
 }
-
 .progress-bar {
   position: absolute;
   bottom: 0;
   left: 0;
   background-color: red;
-  z-index: 1; /* Make sure this is above the other elements but below text */
+  z-index: 1;
 }
-
 .toast-container.bottom-right {
   bottom: 20px;
   right: 20px;
 }
-
 .toast-container.bottom-left {
   bottom: 20px;
   left: 20px;
 }
-
 .toast-container.top-left {
   top: 20px;
   left: 20px;
 }
-
 .toast-container.top-right {
   top: 20px;
   right: 20px;
 }
-.fade-out {
+/* .fade-out {
   animation: react-toastified-fadeOut 0.5s ease-in-out forwards;
 }
 @keyframes react-toastified-fadeOut {
   to {
+    transform: translateX(100%);
+  }
+}
+.fade-out {
+  animation: react-toastified-fadeOut 0.75s
+    cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+@keyframes react-toastified-fadeOut {
+  to {
+    transform: translateX(100%);
+  }
+} */
+.toast-center-button {
+  display: flex;
+  /* background-color: red; */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.toast-container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 9999;
+}
+
+.toast-container.center-top {
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.toast-container.center-bottom {
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.slide-fade-out-up {
+  animation: slideFadeOutUp 0.5s ease-in-out forwards;
+}
+
+@keyframes slideFadeOutUp {
+  to {
     opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+.rotate-fade-out {
+  animation: rotateFadeOut 0.5s ease-in-out forwards;
+}
+
+@keyframes rotateFadeOut {
+  to {
+    opacity: 0;
+    transform: rotate(360deg);
+  }
+}
+
+.zoom-out {
+  animation: zoomOut 0.5s ease-in-out forwards;
+}
+
+@keyframes zoomOut {
+  to {
+    opacity: 0;
+    transform: scale(0);
   }
 }

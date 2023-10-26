@@ -9,10 +9,10 @@ export default function DevelopmentComponent() {
   const [toastType, setToastType] = useState("info");
   const { addToast } = useToast();
 
-
+  // duration: 5000, 
   const tryToast = () => {
     console.log("tryToast")
-    addToast(`This is a ${toastType} toast!`, { type: toastType, position: "bottom-right", duration: 5000, style: { fontSize: "1.2rem" } });
+    addToast(`This is a ${toastType} toast!`, { type: toastType, position: "center-top", style: { fontSize: "1.2rem" } });
   };
   return (
 

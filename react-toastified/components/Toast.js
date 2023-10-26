@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 const ToastContext = createContext();
+// import "./Toast.css";
 
 export const useToast = () => {
   const context = useContext(ToastContext);
@@ -46,10 +47,13 @@ function ToastItem({ toast, index, visibleToasts, removeToast }) {
       <div className={`message`} style={{ position: "relative", zIndex: 2 }}>
         {toast.message}
       </div>
-      <button onClick={() => removeToast(toast.id)}>
+      <button
+        onClick={() => removeToast(toast.id)}
+        className="toast-center-button"
+      >
         <svg
-          width="16"
-          height="16"
+          // width="16"
+          // height="16"
           viewBox="0 0 16 16"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
