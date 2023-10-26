@@ -1,18 +1,28 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import { useState } from 'react';
+import { use, useState } from 'react';
 
 import { useToast } from '@/components/Toast'
-const inter = Inter({ subsets: ['latin'] })
+
 
 export default function DevelopmentComponent() {
   const [toastType, setToastType] = useState("info");
   const { addToast } = useToast();
+  const [count, setCount] = useState(0);
 
-  // duration: 5000, 
   const tryToast = () => {
-    console.log("tryToast")
-    addToast(`This is a ${toastType} toast!`, { type: toastType, position: "center-top", style: { fontSize: "1.2rem" } });
+    console.log("tryToast");
+    setCount(count + 1);
+    if (count >= 10) {
+      setCount(0);
+    }
+    addToast(`This is a ${toastType} toast  number ${count}!`, {
+      type: toastType,
+      rtl: false,
+      onCloseEffect: "slideDown",
+      position: " center-top",
+      style: { fontSize: "1.2rem" },
+    });
   };
   return (
 
@@ -20,7 +30,7 @@ export default function DevelopmentComponent() {
 
       <h1 className="sr-only">Page title</h1>
       {/* Main 3 column grid */}
-      <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8">
+      <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8 ">
         {/* Left column */}
         <div className="grid grid-cols-1 gap-4 lg:col-span-2">
           <section aria-labelledby="section-1-title">

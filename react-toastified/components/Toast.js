@@ -17,8 +17,13 @@ export const TOAST_TYPES = {
   INFO: "info",
 };
 
-function ToastItem({ toast, index, visibleToasts, removeToast }) {
-  const { toasts, setToasts } = useToast();
+function ToastItem({
+  toast,
+  index,
+  visibleToasts,
+  removeToast,
+  isOnCloseEffect,
+}) {
   useEffect(() => {
     if (toast.duration) {
       const startTime = new Date().getTime();
@@ -34,11 +39,17 @@ function ToastItem({ toast, index, visibleToasts, removeToast }) {
       return () => clearInterval(interval);
     }
   }, [toast, removeToast]);
+  useEffect(() => {
+    console.log("isOnCloseEffect");
+    console.log(isOnCloseEffect);
+  }, [isOnCloseEffect]);
+  const cssClasses = `toast toast-${index} ${
+    visibleToasts.includes(toast.id) ? "show" : ""
+  } ${toast.isFadingOut ? "fade-out" : ""} toast-${toast.type} ${
+    toast.rtl ? "toastifed-rtl" : "toastifed-ltr"
+  } ${isOnCloseEffect ? isOnCloseEffect : ""}
+  `.trim();
 
-  const cssClasses = `toast toast-${index}  
-  ${visibleToasts.includes(toast.id) ? " show " : ""}  
-  ${toast.isFadingOut ? " fade-out " : ""} 
-  toast-${toast.type}`;
   return (
     <div key={toast.id} className={cssClasses} style={toast.style}>
       {/* {toast.duration && (
@@ -76,12 +87,12 @@ export const ToastProvider = ({ children }) => {
   const [queue, setQueue] = useState([]);
   const [toastContainerPosition, setToastContainerPosition] =
     useState("bottom-right");
-  const validPositions = [
-    "bottom-right",
-    "bottom-left",
-    "top-left",
-    "top-right",
-  ];
+  // const validPositions = [
+  //   "bottom-right",
+  //   "bottom-left",
+  //   "top-left",
+  //   "top-right",
+  // ];
 
   // const validateAndSetPosition = (position, setToastContainerPosition) => {
   //   if (validPositions.includes(position)) {
@@ -109,6 +120,8 @@ export const ToastProvider = ({ children }) => {
       style = {},
       duration = null,
       position,
+      rtl = false,
+      onCloseEffect = false,
     } = options;
     try {
       if (position) {
@@ -122,8 +135,31 @@ export const ToastProvider = ({ children }) => {
     const id = new Date().getTime();
     setToasts([
       ...toasts,
-      { id, message, type, style, duration, isFadingOut: false },
+      {
+        id,
+        message,
+        type,
+        style,
+        duration,
+        isFadingOut: false,
+        rtl,
+        onCloseEffect,
+      },
     ]);
+  };
+  const handleonCloseLeaveEffectClassName = (onCloseEffect) => {
+    switch (onCloseEffect) {
+      case "rotateOut":
+        return "rotate-fade-out";
+      case "zoomIn":
+        return "zoom-in";
+      case "slideUp":
+        return "slide-fade-out-up";
+      case "slideDown":
+        return "slide-fade-out-down";
+      default:
+        return "";
+    }
   };
   const removeToast = (id) => {
     console.log("removeToast");
@@ -132,7 +168,11 @@ export const ToastProvider = ({ children }) => {
     setToasts((prevToasts) => {
       return prevToasts.map((toast) => {
         if (toast.id === id) {
-          return { ...toast, isFadingOut: true };
+          return {
+            ...toast,
+            isFadingOut: true,
+            isOnCloseEffect: toast.onCloseEffect,
+          };
         } else {
           return toast;
         }
@@ -153,6 +193,7 @@ export const ToastProvider = ({ children }) => {
       }
     }, 500); // Wait for 500ms to match the fade-out duration in the CSS
   };
+
   return (
     <ToastContext.Provider value={{ addToast, removeToast, setToasts, toasts }}>
       {children}

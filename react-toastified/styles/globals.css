@@ -14,7 +14,7 @@
   transform: translateY(0);
 }
 .toast-container:hover .toast:nth-child(1) {
-  z-index: 3;
+  z-index: 1;
   transform: translateY(0) scale(1);
   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
@@ -24,7 +24,7 @@
   transform: translateY(-130%) scale(1);
 }
 .toast-container:hover .toast:nth-child(3) {
-  z-index: 1;
+  z-index: 3;
   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1);
   transform: translateY(-260%) scale(1);
 }
@@ -37,7 +37,7 @@
     opacity 0.4s ease-in-out;
   border-radius: 0.5rem;
   background-color: #03f;
-  width: 420px;
+  width: 320px;
   max-width: min(420px, 100vw - 48px);
   display: flex;
   flex-direction: row;
@@ -48,6 +48,7 @@
   border-radius: 12px;
   max-height: 63px;
   background-color: #0072f4;
+
   font-size: 1.2rem;
 }
 .toast.show {
@@ -126,31 +127,38 @@
   left: 20px;
 }
 .toast-container.top-left {
-  top: 20px;
+  top: 80px;
   left: 20px;
 }
 .toast-container.top-right {
-  top: 20px;
+  top: 80px;
   right: 20px;
 }
-/* .fade-out {
+.toastifed-ltr {
+  flex-direction: row;
+}
+.toastifed-rtl {
+  flex-direction: row-reverse;
+}
+
+.fade-out {
   animation: react-toastified-fadeOut 0.5s ease-in-out forwards;
 }
 @keyframes react-toastified-fadeOut {
   to {
-    transform: translateX(100%);
+    opacity: 0;
   }
 }
-.fade-out {
-  animation: react-toastified-fadeOut 0.75s
+.exit-left-out {
+  animation: react-toastified-exit-right 0.75s
     cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
 
-@keyframes react-toastified-fadeOut {
+@keyframes react-toastified-exit-right {
   to {
     transform: translateX(100%);
   }
-} */
+}
 .toast-center-button {
   display: flex;
   /* background-color: red; */
@@ -158,17 +166,17 @@
   align-items: center;
   flex-direction: column;
 }
-
+/* 
 .toast-container {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   position: fixed;
   z-index: 9999;
-}
+} */
 
 .toast-container.center-top {
-  top: 20px;
+  top: 80px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -189,7 +197,16 @@
     transform: translateY(-100%);
   }
 }
+.slide-fade-out-down {
+  animation: slideFadeOutDown 0.5s ease-in-out forwards;
+}
 
+@keyframes slideFadeOutDown {
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
 .rotate-fade-out {
   animation: rotateFadeOut 0.5s ease-in-out forwards;
 }
@@ -208,6 +225,57 @@
 @keyframes zoomOut {
   to {
     opacity: 0;
-    transform: scale(0);
+    transform: scale(-1);
   }
+}
+
+/* ...Existing CSS */
+
+/* Custom CSS for top-positioned toasts */
+.toast-container.center-top:hover .toast,
+.toast-container.top-right:hover .toast,
+.toast-container.top-left:hover .toast {
+  transform: translateY(0);
+}
+.toast-container.center-top:hover .toast:nth-child(1),
+.toast-container.top-right:hover .toast:nth-child(1),
+.toast-container.top-left:hover .toast:nth-child(1) {
+  z-index: 1;
+  transform: translateY(0) scale(1);
+}
+.toast-container.center-top:hover .toast:nth-child(2),
+.toast-container.top-right:hover .toast:nth-child(2),
+.toast-container.top-left:hover .toast:nth-child(2) {
+  z-index: 2;
+  transform: translateY(130%) scale(1);
+}
+.toast-container.center-top:hover .toast:nth-child(3),
+.toast-container.top-right:hover .toast:nth-child(3),
+.toast-container.top-left:hover .toast:nth-child(3) {
+  z-index: 3;
+  transform: translateY(260%) scale(1);
+}
+.toastified-rainbow-gradient-border {
+  position: relative;
+  /* z-index: 1; */
+}
+
+.toastified-rainbow-gradient-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 16px;
+
+  z-index: -1;
+  background: linear-gradient(transparent, transparent),
+    /* Inner background */
+      linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet); /* Gradient border */
+  background-clip: padding-box, border-box;
+
+  /* Adjust border width here */
+  border: 4px solid transparent;
+  box-sizing: border-box;
 }
