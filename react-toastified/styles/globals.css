@@ -47,7 +47,6 @@
   padding: 16px;
   border-radius: 12px;
   max-height: 63px;
-  background-color: #0072f4;
 
   font-size: 1.2rem;
 }
@@ -304,42 +303,113 @@
   background-color: #00ffff;
 }
 
-/* Success - First Variation */
-.toast-success-variation1 {
-  background-color: #008000; /* Dark Green */
+/* /// strips  */
+
+.bg_move {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: repeating-radial-gradient(
+      circle at 100% 100%,
+      rgba(255, 190, 11, 0.5) 4%,
+      rgba(255, 190, 11, 0.5) 8%,
+      rgba(251, 86, 7, 0.5) 8%,
+      rgba(251, 86, 7, 0.5) 12%,
+      rgba(255, 0, 110, 0.5) 12%,
+      rgba(255, 0, 110, 0.5) 16%,
+      rgba(131, 56, 236, 0.5) 16%,
+      rgba(131, 56, 236, 0.8) 20%,
+      rgba(58, 134, 255, 0.5) 20%,
+      rgba(58, 134, 255, 0.5) 24%
+    ),
+    repeating-radial-gradient(
+      circle at 0% 100%,
+      rgba(255, 190, 11, 0.7) 4%,
+      rgba(255, 190, 11, 0.9) 8%,
+      rgba(251, 86, 7, 0.7) 8%,
+      rgba(251, 86, 7, 0.9) 12%,
+      rgba(255, 0, 110, 0.7) 12%,
+      rgba(255, 0, 110, 0.9) 16%,
+      rgba(131, 56, 236, 0.8) 16%,
+      rgba(131, 56, 236, 0.8) 20%,
+      rgba(58, 134, 255, 0.8) 20%,
+      rgba(58, 134, 255, 0.8) 24%
+    );
+  background-size: 250px 250px;
+  background-position: 0 0;
+  -webkit-animation: stripes 3s linear infinite;
+  animation: stripes 3s linear infinite;
+  /* background-clip:  */
+  /* -webkit-background-clip: text; */
+  color: transparent;
 }
 
-/* Error - First Variation */
-.toast-error-variation1 {
-  background-color: #8b0000; /* Dark Red */
+@-webkit-keyframes stripes {
+  100% {
+    background-position: 250px 0, 250px 0, 100px 0;
+  }
 }
 
-/* Warning - First Variation */
-.toast-warning-variation1 {
-  background-color: #daa520; /* Goldenrod */
+@keyframes stripes {
+  100% {
+    background-position: 250px 0, 250px 0, 100px 0;
+  }
 }
 
-/* Info - First Variation */
-.toast-info-variation1 {
-  background-color: #000080; /* Navy */
+.react-toastified-border-card::after {
+  filter: blur(3.5rem);
 }
 
-/* Success - Second Variation */
-.toast-success-variation2 {
-  background-color: #adff2f; /* Green Yellow */
+.react-toastified-border-card::before,
+.react-toastified-border-card::after {
+  content: "";
+  position: absolute;
+  inset: -0.5rem;
+  z-index: -1;
+  background: repeating-radial-gradient(
+      circle at 100% 100%,
+      rgba(255, 190, 11, 0.5) 4%,
+      rgba(255, 190, 11, 0.5) 8%,
+      rgba(251, 86, 7, 0.5) 8%,
+      rgba(251, 86, 7, 0.5) 12%,
+      rgba(255, 0, 110, 0.5) 12%,
+      rgba(255, 0, 110, 0.5) 16%,
+      rgba(131, 56, 236, 0.5) 16%,
+      rgba(131, 56, 236, 0.8) 20%,
+      rgba(58, 134, 255, 0.5) 20%,
+      rgba(58, 134, 255, 0.5) 24%
+    ),
+    repeating-radial-gradient(
+      circle at 0% 100%,
+      rgba(255, 190, 11, 0.7) 4%,
+      rgba(255, 190, 11, 0.9) 8%,
+      rgba(251, 86, 7, 0.7) 8%,
+      rgba(251, 86, 7, 0.9) 12%,
+      rgba(255, 0, 110, 0.7) 12%,
+      rgba(255, 0, 110, 0.9) 16%,
+      rgba(131, 56, 236, 0.8) 16%,
+      rgba(131, 56, 236, 0.8) 20%,
+      rgba(58, 134, 255, 0.8) 20%,
+      rgba(58, 134, 255, 0.8) 24%
+    );
+  border-radius: inherit;
 }
 
-/* Error - Second Variation */
-.toast-error-variation2 {
-  background-color: #ff69b4; /* Hot Pink */
-}
-
-/* Warning - Second Variation */
-.toast-warning-variation2 {
-  background-color: #ffd700; /* Gold */
-}
-
-/* Info - Second Variation */
-.toast-info-variation2 {
-  background-color: #4682b4; /* Steel Blue */
+@keyframes react-toastified-rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

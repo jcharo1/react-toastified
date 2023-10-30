@@ -19,8 +19,8 @@ export default function DevelopmentComponent() {
     addToast(`This is a ${toastType} toast  number ${count}!`, {
       type: toastType,
       rtl: false,
-      onCloseEffect: "rotateOut",
-      position: " bottom-right",
+      // onCloseEffect: "rotateOut",
+      position: "center-bottom",
 
       style: { fontSize: "1.2rem" },
     });
@@ -31,14 +31,14 @@ export default function DevelopmentComponent() {
 
       <h1 className="sr-only">Page title</h1>
       {/* Main 3 column grid */}
-      <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8 ">
+      <div className="flex items-center justify-center">
         {/* Left column */}
         <div className="grid grid-cols-1 gap-4 lg:col-span-2">
           <section aria-labelledby="section-1-title">
             <h2 className="sr-only" id="section-1-title">
               Section title
             </h2>
-            <div className="overflow-hidden rounded-lg bg-white shadow">
+            <div className="overflow-hidden rounded-lg bg-white shadow bg_move">
               <div className="p-6"> <div className="w-3/4 p-4">
                 <h1 className="text-2xl font-bold mb-4">🍞✨ React-Toastified — Get Your Notifications Toasty!</h1>
                 <div>

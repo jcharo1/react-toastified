@@ -36,7 +36,7 @@ function ToastItem({ toast, index, visibleToasts, removeToast }) {
 
   const cssClasses = `toast toast-${index} ${
     visibleToasts.includes(toast.id) ? "show" : ""
-  } ${toast.isFadingOut ? "fade-out" : ""} ${getToastClass(toast.type, 1)} ${
+  } ${toast.isFadingOut ? "fade-out" : ""} ${getToastClass(toast.type)} ${
     toast.rtl ? "toastifed-rtl" : "toastifed-ltr"
   } `.trim();
   function getToastClass(type, variation = "default") {
@@ -210,7 +210,7 @@ export const ToastProvider = ({ children }) => {
   return (
     <ToastContext.Provider value={{ addToast, removeToast, setToasts, toasts }}>
       {children}
-      <div className={`toast-container ${toastContainerPosition}`}>
+      <div className={`toast-container  ${toastContainerPosition}`}>
         {[...toasts].reverse().map((toast, index) => (
           <ToastItem
             key={toast.id}
