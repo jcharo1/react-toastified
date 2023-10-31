@@ -141,7 +141,6 @@ export const ToastProvider = ({ children }) => {
     try {
       if (position) {
         setToastContainerPosition(position);
-        // validateAndSetPosition(position, setToastContainerPosition);
       }
     } catch (error) {
       console.error(error.message);
