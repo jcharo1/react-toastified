@@ -133,7 +133,7 @@ export const ToastProvider = ({ children }) => {
     const {
       type = TOAST_TYPES.INFO,
       style = {},
-      duration = null,
+      duration = 7000,
       position,
       rtl = false,
       colorVariation = null,
@@ -141,7 +141,6 @@ export const ToastProvider = ({ children }) => {
     try {
       if (position) {
         setToastContainerPosition(position);
-        // validateAndSetPosition(position, setToastContainerPosition);
       }
     } catch (error) {
       console.error(error.message);
@@ -211,15 +210,17 @@ export const ToastProvider = ({ children }) => {
     <ToastContext.Provider value={{ addToast, removeToast, setToasts, toasts }}>
       {children}
       <div className={`toast-container  ${toastContainerPosition}`}>
-        {[...toasts].reverse().map((toast, index) => (
-          <ToastItem
-            key={toast.id}
-            toast={toast}
-            index={index}
-            visibleToasts={visibleToasts}
-            removeToast={removeToast}
-          />
-        ))}
+        <div className={` ${toasts.length > 0 ? "toast-hover-wrapper" : ""}`}>
+          {[...toasts].reverse().map((toast, index) => (
+            <ToastItem
+              key={toast.id}
+              toast={toast}
+              index={index}
+              visibleToasts={visibleToasts}
+              removeToast={removeToast}
+            />
+          ))}
+        </div>
       </div>
     </ToastContext.Provider>
   );
