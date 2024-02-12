@@ -1,7 +1,7 @@
 .toast-container {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  width: 320px;
+  padding: 4px;
   z-index: 9999;
   perspective: 1000px;
   color: currentColor;
@@ -11,7 +11,7 @@
   transform: translateY(0);
 }
 .toast-container:hover .toast:nth-child(1) {
-  z-index: 3;
+  z-index: 1;
   transform: translateY(0) scale(1);
   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
@@ -21,15 +21,12 @@
   transform: translateY(-130%) scale(1);
 }
 .toast-container:hover .toast:nth-child(3) {
-  z-index: 1;
+  z-index: 3;
   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1);
   transform: translateY(-260%) scale(1);
 }
-
 .toast {
   position: absolute;
-  /* position: relative; */
-
   bottom: 0;
   right: 0;
   opacity: 0;
@@ -37,19 +34,31 @@
     opacity 0.4s ease-in-out;
   border-radius: 0.5rem;
   background-color: #03f;
-  width: 420px;
+  width: 320px;
   max-width: min(420px, 100vw - 48px);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  line-height: 21px;
+  /* line-height: 21px; */
   padding: 16px;
   border-radius: 12px;
   max-height: 63px;
-  background-color: #0072f4;
+
   font-size: 1.2rem;
+}
+.toast-hover-wrapper {
+  position: relative;
+  width: 100%;
+  height: 63px;
+  max-height: 220px;
+
+  /* pointer-events: none; */
+  /* background: red; */
+}
+.toast-hover-wrapper:hover {
+  /* pointer-events: auto; */
+  height: 200px;
 }
 .toast.show {
   opacity: 1;
@@ -98,59 +107,319 @@
 .test-container-pages {
   height: 100%;
   width: 100%;
-} /*# sourceMappingURL=Toast.css.map */
-
-.toast-success {
-  background-color: #00ffaa;
 }
-
-/* Error - A more aqua-like red */
+.toast-success {
+  background-color: #0fa;
+}
 .toast-error {
   background-color: #ff4560;
 }
-
-/* Warning - An aqua-like orange */
 .toast-warning {
-  background-color: #ffaa44;
+  background-color: #fa4;
 }
-
-/* Info - Keeping it as aqua */
 .toast-info {
-  background-color: #00ffff;
+  background-color: aqua;
 }
-
 .progress-bar {
   position: absolute;
   bottom: 0;
   left: 0;
   background-color: red;
-  z-index: 1; /* Make sure this is above the other elements but below text */
+  z-index: 1;
 }
-
 .toast-container.bottom-right {
   bottom: 20px;
   right: 20px;
 }
-
 .toast-container.bottom-left {
   bottom: 20px;
   left: 20px;
 }
-
 .toast-container.top-left {
-  top: 20px;
+  top: 80px;
   left: 20px;
 }
-
 .toast-container.top-right {
-  top: 20px;
+  top: 80px;
   right: 20px;
 }
+.toastifed-ltr {
+  flex-direction: row;
+}
+.toastifed-rtl {
+  flex-direction: row-reverse;
+}
+
 .fade-out {
   animation: react-toastified-fadeOut 0.5s ease-in-out forwards;
 }
 @keyframes react-toastified-fadeOut {
   to {
     opacity: 0;
+  }
+}
+.exit-left-out {
+  animation: react-toastified-exit-right 0.75s
+    cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+@keyframes react-toastified-exit-right {
+  to {
+    transform: translateX(100%);
+  }
+}
+.toast-center-button {
+  display: flex;
+  /* background-color: red; */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+/* 
+.toast-container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 9999;
+} */
+
+.toast-container.center-top {
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.toast-container.center-bottom {
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.slide-fade-out-up {
+  animation: slideFadeOutUp 0.5s ease-in-out forwards;
+}
+
+@keyframes slideFadeOutUp {
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+.slide-fade-out-down {
+  animation: slideFadeOutDown 0.5s ease-in-out forwards;
+}
+
+@keyframes slideFadeOutDown {
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+.rotate-fade-out {
+  animation: rotateFadeOut 0.5s ease-in-out forwards;
+}
+
+@keyframes rotateFadeOut {
+  to {
+    opacity: 0;
+    transform: rotate(360deg);
+  }
+}
+
+.zoom-out {
+  animation: zoomOut 0.5s ease-in-out forwards;
+}
+
+@keyframes zoomOut {
+  to {
+    opacity: 0;
+    transform: scale(-1);
+  }
+}
+
+/* ...Existing CSS */
+
+/* Custom CSS for top-positioned toasts */
+.toast-container.center-top:hover .toast,
+.toast-container.top-right:hover .toast,
+.toast-container.top-left:hover .toast {
+  transform: translateY(0);
+}
+.toast-container.center-top:hover .toast:nth-child(1),
+.toast-container.top-right:hover .toast:nth-child(1),
+.toast-container.top-left:hover .toast:nth-child(1) {
+  z-index: 1;
+  transform: translateY(0) scale(1);
+}
+.toast-container.center-top:hover .toast:nth-child(2),
+.toast-container.top-right:hover .toast:nth-child(2),
+.toast-container.top-left:hover .toast:nth-child(2) {
+  z-index: 2;
+  transform: translateY(130%) scale(1);
+}
+.toast-container.center-top:hover .toast:nth-child(3),
+.toast-container.top-right:hover .toast:nth-child(3),
+.toast-container.top-left:hover .toast:nth-child(3) {
+  z-index: 3;
+  transform: translateY(260%) scale(1);
+}
+/* .toastified-rainbow-gradient-border {
+  position: relative;
+  /* z-index: 1; */
+/* } */
+/* 
+.toastified-rainbow-gradient-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 16px;
+
+  z-index: -1;
+  background: linear-gradient(transparent, transparent),
+      linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet); 
+  background-clip: padding-box, border-box;
+
+  border: 4px solid transparent;
+  box-sizing: border-box;
+}  */
+
+/* /// new class names */
+
+.toast-default {
+  background-color: #555555;
+}
+
+/* Success - Original */
+.toast-success {
+  background-color: #00ffaa;
+}
+
+/* Error - Original */
+.toast-error {
+  background-color: #ff4560;
+}
+
+/* Warning - Original */
+.toast-warning {
+  background-color: #ffaa44;
+}
+
+/* Info - Original */
+.toast-info {
+  background-color: #00ffff;
+}
+
+/* /// strips  */
+
+.bg_move {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: repeating-radial-gradient(
+      circle at 100% 100%,
+      rgba(255, 190, 11, 0.5) 4%,
+      rgba(255, 190, 11, 0.5) 8%,
+      rgba(251, 86, 7, 0.5) 8%,
+      rgba(251, 86, 7, 0.5) 12%,
+      rgba(255, 0, 110, 0.5) 12%,
+      rgba(255, 0, 110, 0.5) 16%,
+      rgba(131, 56, 236, 0.5) 16%,
+      rgba(131, 56, 236, 0.8) 20%,
+      rgba(58, 134, 255, 0.5) 20%,
+      rgba(58, 134, 255, 0.5) 24%
+    ),
+    repeating-radial-gradient(
+      circle at 0% 100%,
+      rgba(255, 190, 11, 0.7) 4%,
+      rgba(255, 190, 11, 0.9) 8%,
+      rgba(251, 86, 7, 0.7) 8%,
+      rgba(251, 86, 7, 0.9) 12%,
+      rgba(255, 0, 110, 0.7) 12%,
+      rgba(255, 0, 110, 0.9) 16%,
+      rgba(131, 56, 236, 0.8) 16%,
+      rgba(131, 56, 236, 0.8) 20%,
+      rgba(58, 134, 255, 0.8) 20%,
+      rgba(58, 134, 255, 0.8) 24%
+    );
+  background-size: 250px 250px;
+  background-position: 0 0;
+  -webkit-animation: stripes 3s linear infinite;
+  animation: stripes 3s linear infinite;
+  /* background-clip:  */
+  /* -webkit-background-clip: text; */
+  color: transparent;
+}
+
+@-webkit-keyframes stripes {
+  100% {
+    background-position: 250px 0, 250px 0, 100px 0;
+  }
+}
+
+@keyframes stripes {
+  100% {
+    background-position: 250px 0, 250px 0, 100px 0;
+  }
+}
+
+.react-toastified-border-card::after {
+  filter: blur(3.5rem);
+}
+
+.react-toastified-border-card::before,
+.react-toastified-border-card::after {
+  content: "";
+  position: absolute;
+  inset: -0.5rem;
+  z-index: -1;
+  background: repeating-radial-gradient(
+      circle at 100% 100%,
+      rgba(255, 190, 11, 0.5) 4%,
+      rgba(255, 190, 11, 0.5) 8%,
+      rgba(251, 86, 7, 0.5) 8%,
+      rgba(251, 86, 7, 0.5) 12%,
+      rgba(255, 0, 110, 0.5) 12%,
+      rgba(255, 0, 110, 0.5) 16%,
+      rgba(131, 56, 236, 0.5) 16%,
+      rgba(131, 56, 236, 0.8) 20%,
+      rgba(58, 134, 255, 0.5) 20%,
+      rgba(58, 134, 255, 0.5) 24%
+    ),
+    repeating-radial-gradient(
+      circle at 0% 100%,
+      rgba(255, 190, 11, 0.7) 4%,
+      rgba(255, 190, 11, 0.9) 8%,
+      rgba(251, 86, 7, 0.7) 8%,
+      rgba(251, 86, 7, 0.9) 12%,
+      rgba(255, 0, 110, 0.7) 12%,
+      rgba(255, 0, 110, 0.9) 16%,
+      rgba(131, 56, 236, 0.8) 16%,
+      rgba(131, 56, 236, 0.8) 20%,
+      rgba(58, 134, 255, 0.8) 20%,
+      rgba(58, 134, 255, 0.8) 24%
+    );
+  border-radius: inherit;
+}
+
+@keyframes react-toastified-rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

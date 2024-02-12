@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 const ToastContext = createContext();
-import "./Toast.css";
+// import "./Toast.css";
 
 export const useToast = () => {
   const context = useContext(ToastContext);
@@ -18,7 +18,6 @@ export const TOAST_TYPES = {
 };
 
 function ToastItem({ toast, index, visibleToasts, removeToast }) {
-  const { toasts, setToasts } = useToast();
   useEffect(() => {
     if (toast.duration) {
       const startTime = new Date().getTime();
@@ -35,10 +34,37 @@ function ToastItem({ toast, index, visibleToasts, removeToast }) {
     }
   }, [toast, removeToast]);
 
-  const cssClasses = `toast toast-${index}  
-  ${visibleToasts.includes(toast.id) ? " show " : ""}  
-  ${toast.isFadingOut ? " fade-out " : ""} 
-  toast-${toast.type}`;
+  const cssClasses = `toast toast-${index} ${
+    visibleToasts.includes(toast.id) ? "show" : ""
+  } ${toast.isFadingOut ? "fade-out" : ""} ${getToastClass(toast.type)} ${
+    toast.rtl ? "toastifed-rtl" : "toastifed-ltr"
+  } `.trim();
+  function getToastClass(type, variation = "default") {
+    let baseClass = "toast-";
+
+    switch (type) {
+      case "success":
+        baseClass += "success";
+        break;
+      case "error":
+        baseClass += "error";
+        break;
+      case "warning":
+        baseClass += "warning";
+        break;
+      case "info":
+        baseClass += "info";
+        break;
+      default:
+        return "Invalid type";
+    }
+
+    if (variation !== "default") {
+      baseClass += `-variation${variation}`;
+    }
+
+    return baseClass;
+  }
   return (
     <div key={toast.id} className={cssClasses} style={toast.style}>
       {/* {toast.duration && (
@@ -47,10 +73,13 @@ function ToastItem({ toast, index, visibleToasts, removeToast }) {
       <div className={`message`} style={{ position: "relative", zIndex: 2 }}>
         {toast.message}
       </div>
-      <button onClick={() => removeToast(toast.id)}>
+      <button
+        onClick={() => removeToast(toast.id)}
+        className="toast-center-button"
+      >
         <svg
-          width="16"
-          height="16"
+          // width="16"
+          // height="16"
           viewBox="0 0 16 16"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -73,12 +102,12 @@ export const ToastProvider = ({ children }) => {
   const [queue, setQueue] = useState([]);
   const [toastContainerPosition, setToastContainerPosition] =
     useState("bottom-right");
-  const validPositions = [
-    "bottom-right",
-    "bottom-left",
-    "top-left",
-    "top-right",
-  ];
+  // const validPositions = [
+  //   "bottom-right",
+  //   "bottom-left",
+  //   "top-left",
+  //   "top-right",
+  // ];
 
   // const validateAndSetPosition = (position, setToastContainerPosition) => {
   //   if (validPositions.includes(position)) {
@@ -104,13 +133,14 @@ export const ToastProvider = ({ children }) => {
     const {
       type = TOAST_TYPES.INFO,
       style = {},
-      duration = null,
+      duration = 7000,
       position,
+      rtl = false,
+      colorVariation = null,
     } = options;
     try {
       if (position) {
         setToastContainerPosition(position);
-        // validateAndSetPosition(position, setToastContainerPosition);
       }
     } catch (error) {
       console.error(error.message);
@@ -119,23 +149,48 @@ export const ToastProvider = ({ children }) => {
     const id = new Date().getTime();
     setToasts([
       ...toasts,
-      { id, message, type, style, duration, isFadingOut: false },
+      {
+        id,
+        message,
+        type,
+        style,
+        duration,
+        isFadingOut: false,
+        rtl,
+        colorVariation,
+      },
     ]);
   };
   const removeToast = (id) => {
     console.log("removeToast");
-    console.log(id);
+    // console.log(id);
     // Mark the toast for removal (setting isFadingOut property to true)
     setToasts((prevToasts) => {
       return prevToasts.map((toast) => {
         if (toast.id === id) {
-          return { ...toast, isFadingOut: true };
+          return {
+            ...toast,
+            isFadingOut: true,
+          };
         } else {
           return toast;
         }
       });
     });
-
+    const handleonCloseLeaveEffectClassName = (onCloseEffect) => {
+      switch (onCloseEffect) {
+        case "rotateOut":
+          return "rotate-fade-out";
+        case "zoomIn":
+          return "zoom-in";
+        case "slideUp":
+          return "slide-fade-out-up";
+        case "slideDown":
+          return "slide-fade-out-down";
+        default:
+          return "";
+      }
+    };
     setTimeout(() => {
       // Remove the toast after the animation duration
       setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
@@ -150,19 +205,22 @@ export const ToastProvider = ({ children }) => {
       }
     }, 500); // Wait for 500ms to match the fade-out duration in the CSS
   };
+
   return (
     <ToastContext.Provider value={{ addToast, removeToast, setToasts, toasts }}>
       {children}
-      <div className={`toast-container ${toastContainerPosition}`}>
-        {[...toasts].reverse().map((toast, index) => (
-          <ToastItem
-            key={toast.id}
-            toast={toast}
-            index={index}
-            visibleToasts={visibleToasts}
-            removeToast={removeToast}
-          />
-        ))}
+      <div className={`toast-container  ${toastContainerPosition}`}>
+        <div className={` ${toasts.length > 0 ? "toast-hover-wrapper" : ""}`}>
+          {[...toasts].reverse().map((toast, index) => (
+            <ToastItem
+              key={toast.id}
+              toast={toast}
+              index={index}
+              visibleToasts={visibleToasts}
+              removeToast={removeToast}
+            />
+          ))}
+        </div>
       </div>
     </ToastContext.Provider>
   );

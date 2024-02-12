@@ -50,6 +50,19 @@
 
   font-size: 1.2rem;
 }
+.toast-hover-wrapper {
+  position: relative;
+  width: 100%;
+  height: 63px;
+  max-height: 220px;
+
+  /* pointer-events: none; */
+  /* background: red; */
+}
+.toast-hover-wrapper:hover {
+  /* pointer-events: auto; */
+  height: 200px;
+}
 .toast.show {
   opacity: 1;
 }

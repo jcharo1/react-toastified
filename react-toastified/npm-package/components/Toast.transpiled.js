@@ -168,7 +168,7 @@ var ToastProvider = exports.ToastProvider = function ToastProvider(_ref2) {
       _options$style = options.style,
       style = _options$style === void 0 ? {} : _options$style,
       _options$duration = options.duration,
-      duration = _options$duration === void 0 ? null : _options$duration,
+      duration = _options$duration === void 0 ? 7000 : _options$duration,
       position = options.position,
       _options$rtl = options.rtl,
       rtl = _options$rtl === void 0 ? false : _options$rtl,
@@ -250,6 +250,8 @@ var ToastProvider = exports.ToastProvider = function ToastProvider(_ref2) {
     }
   }, children, /*#__PURE__*/_react["default"].createElement("div", {
     className: "toast-container  ".concat(toastContainerPosition)
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    className: " ".concat(toasts.length > 0 ? "toast-hover-wrapper" : "")
   }, _toConsumableArray(toasts).reverse().map(function (toast, index) {
     return /*#__PURE__*/_react["default"].createElement(ToastItem, {
       key: toast.id,
@@ -258,5 +260,5 @@ var ToastProvider = exports.ToastProvider = function ToastProvider(_ref2) {
       visibleToasts: visibleToasts,
       removeToast: removeToast
     });
-  })));
+  }))));
 };
