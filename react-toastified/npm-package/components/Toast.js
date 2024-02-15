@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 const ToastContext = createContext();
-// import "./Toast.css";
+import "../styles/Toast.css";
 
 export const useToast = () => {
   const context = useContext(ToastContext);

@@ -4,7 +4,8 @@
   "description": "An easy-to-use, customizable toast notification system for React apps",
   "main": "./npm-package/components/Toast.min.js",
   "scripts": {
-    "prepare-package": "mkdir -p npm-package/components && mkdir -p npm-package/styles && cp -r ./components/* npm-package/components/ && cp styles/globals.css npm-package/styles/globals.css && babel ./components/Toast.js --out-file ./npm-package/components/Toast.transpiled.js && terser ./npm-package/components/Toast.transpiled.js -o ./npm-package/components/Toast.min.js && postcss ./styles/globals.css -o ./npm-package/styles/globals.min.css"
+    "dev": "next dev",
+    "prepare-package": "mkdir -p npm-package/components && mkdir -p npm-package/styles && cp -r ./components/* npm-package/components/ && cp styles/Toast.css npm-package/styles/Toast.css && babel ./components/Toast.js --out-file ./npm-package/components/Toast.transpiled.js && terser ./npm-package/components/Toast.transpiled.js -o ./npm-package/components/Toast.min.js && postcss ./styles/Toast.css -o ./npm-package/styles/Toast.min.css"
   },
   "keywords": [
     "react",
