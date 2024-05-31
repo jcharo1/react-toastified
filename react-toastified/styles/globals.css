@@ -178,14 +178,6 @@
   align-items: center;
   flex-direction: column;
 }
-/* 
-.toast-container {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  position: fixed;
-  z-index: 9999;
-} */
 
 .toast-container.center-top {
   top: 80px;
@@ -293,5 +285,3 @@
 .toast-info {
   background-color: #00ffff;
 }
-
-/* /// strips  */
