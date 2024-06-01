@@ -1,6 +1,19 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+body {
+  font-family: "Nunito", sans-serif;
+  background-color: #050505;
+
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  color: #333;
+}
 .toast-container {
   position: fixed;
   width: 320px;
@@ -8,7 +21,11 @@
   z-index: 9999;
   perspective: 1000px;
   color: currentColor;
+  /* background-color: #555555; */
   transition: opacity 0.5s ease-in-out;
+}
+.toast.unset-bottom {
+  bottom: unset;
 }
 .toast-container:hover .toast {
   transform: translateY(0);
@@ -29,6 +46,7 @@
   transform: translateY(-260%) scale(1);
 }
 .toast {
+  overflow: hidden;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -52,15 +70,18 @@
 }
 .toast-hover-wrapper {
   position: relative;
+
   width: 100%;
   height: 63px;
   max-height: 220px;
+  /* background-color: pink; */
 
   /* pointer-events: none; */
   /* background: red; */
 }
 .toast-hover-wrapper:hover {
   /* pointer-events: auto; */
+
   height: 200px;
 }
 .toast.show {
@@ -124,9 +145,11 @@
   background-color: aqua;
 }
 .progress-bar {
+  transition: width linear 0.5s;
   position: absolute;
   bottom: 0;
   left: 0;
+  height: 2px;
   background-color: red;
   z-index: 1;
 }
@@ -139,11 +162,11 @@
   left: 20px;
 }
 .toast-container.top-left {
-  top: 80px;
+  top: 20px;
   left: 20px;
 }
 .toast-container.top-right {
-  top: 80px;
+  top: 20px;
   right: 20px;
 }
 .toastifed-ltr {
@@ -180,7 +203,7 @@
 }
 
 .toast-container.center-top {
-  top: 80px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -191,14 +214,25 @@
   transform: translateX(-50%);
 }
 
-.slide-fade-out-up {
-  animation: slideFadeOutUp 0.5s ease-in-out forwards;
+.slide-left-fade-out {
+  animation: slideFadeOutLeft 0.5s ease-in-out forwards;
 }
 
-@keyframes slideFadeOutUp {
+@keyframes slideFadeOutLeft {
   to {
     opacity: 0;
-    transform: translateY(-100%);
+    transform: translateX(-100%);
+  }
+}
+
+.slide-right-fade-out {
+  animation: slideFadeOutRight 0.5s ease-in-out forwards;
+}
+
+@keyframes slideFadeOutRight {
+  to {
+    opacity: 0;
+    transform: translateX(100%);
   }
 }
 .slide-fade-out-down {

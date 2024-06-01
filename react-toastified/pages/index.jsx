@@ -18,14 +18,15 @@ export default function DevelopmentComponent() {
     addToast(`This is a ${toastType} toast  number ${count}!`, {
       type: toastType,
       rtl: false,
-      onCloseEffect: "slide-up",
-      position: "center-bottom",
+      // onCloseEffect: "slideUp",
+      duration: 4000,
+      position: "top-right",
 
       style: { fontSize: "1.2rem" },
     });
   };
   return (
-    <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 p-10 bg-slate-500 h-[400vh] ">
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 p-10  text-white">
       <h1 className="sr-only">Page title</h1>
       {/* Main 3 column grid */}
       <div className="flex items-center justify-center">
@@ -35,7 +36,7 @@ export default function DevelopmentComponent() {
             <h2 className="sr-only" id="section-1-title">
               Section title
             </h2>
-            <div className="overflow-hidden rounded-lg bg-white shadow ">
+            <div className="overflow-hidden rounded-lg bg-transparent shadow ">
               <div className="p-6">
                 {" "}
                 <div className="w-3/4 p-4">
