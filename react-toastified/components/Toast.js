@@ -284,11 +284,9 @@ function ToastItem({
     visibleToasts.includes(toast.id) ? "show" : ""
   } ${toast.isFadingOut ? "fade-out" : ""} ${
     toast.onCloseEffect && toast.onCloseEffect
-  } ${getToastClass(toast.type)} ${
-    toast.rtl ? "toastifed-rtl" : "toastifed-ltr"
-  } ${toastContainerPosition.includes("top") && "unset-bottom"} ${
-    toast.classNames
-  }`.trim();
+  } ${toast?.theme} ${toast.rtl ? "toastifed-rtl" : "toastifed-ltr"} ${
+    toastContainerPosition.includes("top") && "unset-bottom"
+  } ${toast.classNames} ${getToastClass(toast.type)}-border `.trim();
 
   function getToastClass(type, variation = "default") {
     let baseClass = "toast-";
@@ -320,7 +318,10 @@ function ToastItem({
   return (
     <div key={toast.id} className={cssClasses} style={toast.style}>
       {toast.duration && (
-        <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+        <div
+          className={`progress-bar ${getToastClass(toast.type)}`}
+          style={{ width: `${progress}%` }}
+        ></div>
       )}
       <div className={`message`} style={{ position: "relative", zIndex: 2 }}>
         {toast.message}
@@ -329,7 +330,13 @@ function ToastItem({
         onClick={() => removeToast(toast.id)}
         className="toast-center-button"
       >
-        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          width={40}
+          height={40}
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M12.8536 2.85355C13.0488 2.65829 13.0488 2.34171 12.8536 2.14645C12.6583 1.95118 12.3417 1.95118 12.1464 2.14645L7.5 6.79289L2.85355 2.14645C2.65829 1.95118 2.34171 1.95118 2.14645 2.14645C1.95118 2.34171 1.95118 2.65829 2.14645 2.85355L6.79289 7.5L2.14645 12.1464C1.95118 12.3417 1.95118 12.6583 2.14645 12.8536C2.34171 13.0488 2.65829 13.0488 2.85355 12.8536L7.5 8.20711L12.1464 12.8536C12.3417 13.0488 12.6583 13.0488 12.8536 12.8536C13.0488 12.6583 13.0488 12.3417 12.8536 12.1464L8.20711 7.5L12.8536 2.85355Z"
             fill="currentColor"
@@ -390,6 +397,7 @@ export const ToastProvider = ({ children }) => {
       style = {},
       duration = 7000,
       position,
+      theme = "dark",
       rtl = false,
       colorVariation = null,
       onCloseEffect,
@@ -407,6 +415,7 @@ export const ToastProvider = ({ children }) => {
       ...toasts,
       {
         id,
+        theme,
         message,
         type,
         style,

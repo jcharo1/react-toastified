@@ -15,15 +15,18 @@ export default function DevelopmentComponent() {
     if (count >= 10) {
       setCount(0);
     }
-    addToast(`This is a ${toastType} toast  number ${count}!`, {
-      type: toastType,
-      rtl: false,
-      // onCloseEffect: "slideUp",
-      duration: 4000,
-      position: "top-right",
+    addToast(
+      `This is a ${toastType} toast  number ${count}! This is a ${toastType} toast  number ${count}!This is a ${toastType} toast  number ${count}!This is a ${toastType} toast  number ${count}!This is a ${toastType} toast  number ${count}!`,
+      {
+        type: toastType,
+        rtl: false,
+        // onCloseEffect: "slideUp",
+        duration: 5000000000,
+        position: "top-right",
 
-      style: { fontSize: "1.2rem" },
-    });
+        style: { fontSize: "1.2rem" },
+      }
+    );
   };
   return (
     <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 p-10  text-white">
@@ -40,9 +43,7 @@ export default function DevelopmentComponent() {
               <div className="p-6">
                 {" "}
                 <div className="w-3/4 p-4">
-                  <h1 className="text-2xl font-bold mb-4">
-                    🍞✨ React-Toastified — Get Your Notifications Toasty!
-                  </h1>
+                  <h1 className="text-2xl font-bold mb-4"></h1>
                   <div>
                     <button
                       className="mr-2 p-2 bg-blue-500 text-white rounded"
