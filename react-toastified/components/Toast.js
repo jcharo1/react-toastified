@@ -1,3 +1,253 @@
+// import React, {
+//   createContext,
+//   useContext,
+//   useState,
+//   useEffect,
+//   useRef,
+// } from "react";
+// const ToastContext = createContext();
+
+// export const useToast = () => {
+//   const context = useContext(ToastContext);
+//   if (!context) {
+//     throw new Error("useToast must be used within a ToastProvider");
+//   }
+//   return context;
+// };
+
+// export const TOAST_TYPES = {
+//   SUCCESS: "success",
+//   ERROR: "error",
+//   WARNING: "warning",
+//   INFO: "info",
+// };
+
+// function ToastItem({
+//   toast,
+//   index,
+//   visibleToasts,
+//   removeToast,
+//   toastContainerPosition,
+//   isHovered,
+// }) {
+//   const [progress, setProgress] = useState(100);
+//   const intervalRef = useRef(null);
+
+//   useEffect(() => {
+//     if (toast.duration) {
+//       intervalRef.current = setInterval(() => {
+//         if (!isHovered) {
+//           setProgress((prevProgress) => {
+//             const newProgress = prevProgress - 100 / (toast.duration / 100);
+//             if (newProgress <= 0) {
+//               clearInterval(intervalRef.current);
+//               removeToast(toast.id);
+//               return 0;
+//             }
+//             return newProgress;
+//           });
+//         }
+//       }, 100);
+
+//       return () => clearInterval(intervalRef.current);
+//     }
+//   }, [toast, removeToast, isHovered]);
+
+//   const cssClasses = `toast toast-${index} ${
+//     visibleToasts.includes(toast.id) ? "show" : ""
+//   } ${toast.isFadingOut ? "fade-out" : ""} ${
+//     toast.onCloseEffect && toast.onCloseEffect
+//   } ${getToastClass(toast.type)} ${
+//     toast.rtl ? "toastifed-rtl" : "toastifed-ltr"
+//   } ${toastContainerPosition.includes("top") && "unset-bottom"} ${
+//     toast.classNames
+//   }`.trim();
+
+//   function getToastClass(type, variation = "default") {
+//     let baseClass = "toast-";
+
+//     switch (type) {
+//       case "success":
+//         baseClass += "success";
+//         break;
+//       case "error":
+//         baseClass += "error";
+//         break;
+//       case "warning":
+//         baseClass += "warning";
+//         break;
+//       case "info":
+//         baseClass += "info";
+//         break;
+//       default:
+//         return "Invalid type";
+//     }
+
+//     if (variation !== "default") {
+//       baseClass += `-variation${variation}`;
+//     }
+
+//     return baseClass;
+//   }
+
+//   return (
+//     <div key={toast.id} className={cssClasses} style={toast.style}>
+//       {toast.duration && (
+//         <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+//       )}
+//       <div className={`message`} style={{ position: "relative", zIndex: 2 }}>
+//         {toast.message}
+//       </div>
+//       <button
+//         onClick={() => removeToast(toast.id)}
+//         className="toast-center-button"
+//       >
+//         <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+//           <path
+//             d="M12.8536 2.85355C13.0488 2.65829 13.0488 2.34171 12.8536 2.14645C12.6583 1.95118 12.3417 1.95118 12.1464 2.14645L7.5 6.79289L2.85355 2.14645C2.65829 1.95118 2.34171 1.95118 2.14645 2.14645C1.95118 2.34171 1.95118 2.65829 2.14645 2.85355L6.79289 7.5L2.14645 12.1464C1.95118 12.3417 1.95118 12.6583 2.14645 12.8536C2.34171 13.0488 2.65829 13.0488 2.85355 12.8536L7.5 8.20711L12.1464 12.8536C12.3417 13.0488 12.6583 13.0488 12.8536 12.8536C13.0488 12.6583 13.0488 12.3417 12.8536 12.1464L8.20711 7.5L12.8536 2.85355Z"
+//             fill="currentColor"
+//             fillRrule="evenodd"
+//             clipRule="evenodd"
+//           ></path>
+//         </svg>
+//       </button>
+//     </div>
+//   );
+// }
+
+// export const ToastProvider = ({ children }) => {
+//   const [toasts, setToasts] = useState([]);
+//   const [visibleToasts, setVisibleToasts] = useState([]);
+//   const [queue, setQueue] = useState([]);
+//   const [toastContainerPosition, setToastContainerPosition] =
+//     useState("bottom-right");
+//   const [isHovered, setIsHovered] = useState(false);
+
+//   useEffect(() => {
+//     if (toasts.length > 3) {
+//       setQueue(toasts.slice(0, -3));
+//       setVisibleToasts(toasts.slice(-3).map((t) => t.id));
+//     } else {
+//       setVisibleToasts(toasts.map((t) => t.id));
+//     }
+//   }, [toasts]);
+
+//   const addToast = (message, options = {}) => {
+//     const {
+//       type = TOAST_TYPES.INFO,
+//       style = {},
+//       duration = 7000,
+//       position,
+//       rtl = false,
+//       colorVariation = null,
+//       onCloseEffect,
+//     } = options;
+//     try {
+//       if (position) {
+//         setToastContainerPosition(position);
+//       }
+//     } catch (error) {
+//       console.error(error.message);
+//     }
+
+//     const id = new Date().getTime();
+//     setToasts([
+//       ...toasts,
+//       {
+//         id,
+//         message,
+//         type,
+//         style,
+//         duration,
+//         onCloseEffect,
+//         isFadingOut: false,
+//         rtl,
+//         colorVariation,
+//       },
+//     ]);
+//   };
+
+//   const removeToast = (id) => {
+//     const getOnLeaveClassName = (position) => {
+//       switch (position) {
+//         case "rotateOut":
+//           return "rotate-fade-out";
+//         case "zoomIn":
+//           return "zoom-in";
+//         case "center-top":
+//           return "slide-fade-out-up";
+//         case "top-right":
+//           return "slide-right-fade-out";
+//         case "top-left":
+//           return "slide-left-fade-out";
+//         case "slideDown":
+//           return "slide-fade-out-down";
+//         default:
+//           return "";
+//       }
+//     };
+
+//     setToasts((prevToasts) => {
+//       return prevToasts.map((toast) => {
+//         if (toast.id === id) {
+//           return {
+//             ...toast,
+//             classNames: getOnLeaveClassName(toastContainerPosition),
+//             isFadingOut: true,
+//           };
+//         } else {
+//           return toast;
+//         }
+//       });
+//     });
+
+//     setTimeout(() => {
+//       setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
+
+//       if (queue.length > 0) {
+//         const nextToast = queue[0];
+//         setQueue((prevQueue) => prevQueue.slice(1));
+//         setVisibleToasts((prevVisibleToasts) => [
+//           ...prevVisibleToasts,
+//           nextToast.id,
+//         ]);
+//       }
+//     }, 500);
+//   };
+
+//   const handleMouseEnter = () => {
+//     setIsHovered(true);
+//   };
+
+//   const handleMouseLeave = () => {
+//     setIsHovered(false);
+//   };
+
+//   return (
+//     <ToastContext.Provider value={{ addToast, removeToast, setToasts, toasts }}>
+//       {children}
+//       <div className={`toast-container ${toastContainerPosition}`}>
+//         <div
+//           className={`${toasts.length > 0 ? "toast-hover-wrapper" : ""}`}
+//           onMouseEnter={handleMouseEnter}
+//           onMouseLeave={handleMouseLeave}
+//         >
+//           {[...toasts].reverse().map((toast, index) => (
+//             <ToastItem
+//               key={toast.id}
+//               toast={toast}
+//               index={index}
+//               toastContainerPosition={toastContainerPosition}
+//               visibleToasts={visibleToasts}
+//               removeToast={removeToast}
+//               isHovered={isHovered}
+//             />
+//           ))}
+//         </div>
+//       </div>
+//     </ToastContext.Provider>
+//   );
+// };
 import React, {
   createContext,
   useContext,
@@ -28,31 +278,8 @@ function ToastItem({
   visibleToasts,
   removeToast,
   toastContainerPosition,
-  isHovered,
+  progress,
 }) {
-  const [progress, setProgress] = useState(100);
-  const intervalRef = useRef(null);
-
-  useEffect(() => {
-    if (toast.duration) {
-      intervalRef.current = setInterval(() => {
-        if (!isHovered) {
-          setProgress((prevProgress) => {
-            const newProgress = prevProgress - 100 / (toast.duration / 100);
-            if (newProgress <= 0) {
-              clearInterval(intervalRef.current);
-              removeToast(toast.id);
-              return 0;
-            }
-            return newProgress;
-          });
-        }
-      }, 100);
-
-      return () => clearInterval(intervalRef.current);
-    }
-  }, [toast, removeToast, isHovered]);
-
   const cssClasses = `toast toast-${index} ${
     visibleToasts.includes(toast.id) ? "show" : ""
   } ${toast.isFadingOut ? "fade-out" : ""} ${
@@ -106,8 +333,8 @@ function ToastItem({
           <path
             d="M12.8536 2.85355C13.0488 2.65829 13.0488 2.34171 12.8536 2.14645C12.6583 1.95118 12.3417 1.95118 12.1464 2.14645L7.5 6.79289L2.85355 2.14645C2.65829 1.95118 2.34171 1.95118 2.14645 2.14645C1.95118 2.34171 1.95118 2.65829 2.14645 2.85355L6.79289 7.5L2.14645 12.1464C1.95118 12.3417 1.95118 12.6583 2.14645 12.8536C2.34171 13.0488 2.65829 13.0488 2.85355 12.8536L7.5 8.20711L12.1464 12.8536C12.3417 13.0488 12.6583 13.0488 12.8536 12.8536C13.0488 12.6583 13.0488 12.3417 12.8536 12.1464L8.20711 7.5L12.8536 2.85355Z"
             fill="currentColor"
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
           ></path>
         </svg>
       </button>
@@ -122,6 +349,7 @@ export const ToastProvider = ({ children }) => {
   const [toastContainerPosition, setToastContainerPosition] =
     useState("bottom-right");
   const [isHovered, setIsHovered] = useState(false);
+  const [progressMap, setProgressMap] = useState({});
 
   useEffect(() => {
     if (toasts.length > 3) {
@@ -131,6 +359,30 @@ export const ToastProvider = ({ children }) => {
       setVisibleToasts(toasts.map((t) => t.id));
     }
   }, [toasts]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isHovered) {
+        setProgressMap((prevProgressMap) => {
+          const newProgressMap = { ...prevProgressMap };
+          Object.keys(newProgressMap).forEach((toastId) => {
+            if (visibleToasts.includes(parseInt(toastId))) {
+              newProgressMap[toastId] -=
+                100 /
+                (toasts.find((t) => t.id === parseInt(toastId)).duration / 100);
+              if (newProgressMap[toastId] <= 0) {
+                removeToast(parseInt(toastId));
+                delete newProgressMap[toastId];
+              }
+            }
+          });
+          return newProgressMap;
+        });
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [isHovered, visibleToasts, toasts]);
 
   const addToast = (message, options = {}) => {
     const {
@@ -165,6 +417,10 @@ export const ToastProvider = ({ children }) => {
         colorVariation,
       },
     ]);
+    setProgressMap((prevProgressMap) => ({
+      ...prevProgressMap,
+      [id]: 100,
+    }));
   };
 
   const removeToast = (id) => {
@@ -203,6 +459,11 @@ export const ToastProvider = ({ children }) => {
 
     setTimeout(() => {
       setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
+      setProgressMap((prevProgressMap) => {
+        const newProgressMap = { ...prevProgressMap };
+        delete newProgressMap[id];
+        return newProgressMap;
+      });
 
       if (queue.length > 0) {
         const nextToast = queue[0];
@@ -241,6 +502,7 @@ export const ToastProvider = ({ children }) => {
               visibleToasts={visibleToasts}
               removeToast={removeToast}
               isHovered={isHovered}
+              progress={progressMap[toast.id]}
             />
           ))}
         </div>
