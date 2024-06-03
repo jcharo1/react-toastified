@@ -138,28 +138,6 @@ body {
   background-color: rgba(0, 0, 0, 0);
 }
 
-.page-one {
-  height: 100vh;
-  width: 100vw;
-}
-
-.bg-cyan {
-  width: 100vw;
-  height: 100vh;
-  background-color: aqua;
-}
-
-.bg-mint {
-  width: 100vw;
-  height: 100vh;
-  background-color: #00fa9a;
-}
-
-.test-container-pages {
-  height: 100%;
-  width: 100%;
-}
-
 .toast-success {
   background-color: #0fa;
 }
@@ -401,4 +379,31 @@ body {
 /* Info - Original */
 .toast-info {
   background-color: #00ffff;
+}
+.toast-success-colored {
+  background-color: #00ffaa;
+  color: black;
+}
+
+.toast-error-colored {
+  background-color: #ff4560;
+  color: black;
+}
+
+.toast-warning-colored {
+  background-color: #ffaa44;
+  color: black;
+}
+
+.toast-info-colored {
+  background-color: #00ffff;
+  color: black;
+}
+
+/* Add borders to distinguish them */
+.toast-success-colored-border,
+.toast-error-colored-border,
+.toast-warning-colored-border,
+.toast-info-colored-border {
+  border: 0.3px solid transparent;
 }
