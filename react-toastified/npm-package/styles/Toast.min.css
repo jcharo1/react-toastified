@@ -1,77 +1,31 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
-body {
-  font-family: "Nunito", sans-serif;
-  background-color: #050505;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #333;
-}
-
 .toast-container {
   position: fixed;
   width: 320px;
   padding: 4px;
-  height: auto;
   z-index: 9999;
   perspective: 1000px;
-  /* color: white; */
+  color: currentColor;
   transition: opacity 0.5s ease-in-out;
-  overflow: visible; /* Make sure it doesn't cut off the expanded content */
 }
-
-/* Pseudo-element to create a seamless hover area */
-.toast-container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: transparent;
-  z-index: -1;
-  transition: all 0.3s ease;
-}
-
-/* Expanded hover area */
-.toast-container:hover::before {
-  background: rgba(0, 0, 0, 0.1);
-  height: auto;
-}
-
 .toast-container:hover .toast {
   transform: translateY(0);
 }
-
 .toast-container:hover .toast:nth-child(1) {
-  z-index: 3;
+  z-index: 1;
   transform: translateY(0) scale(1);
   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
-
 .toast-container:hover .toast:nth-child(2) {
   z-index: 2;
+  box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1);
   transform: translateY(-130%) scale(1);
-  box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
-
 .toast-container:hover .toast:nth-child(3) {
-  z-index: 1;
-  transform: translateY(-260%) scale(1);
+  z-index: 3;
   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-260%) scale(1);
 }
-
-.toast.unset-bottom {
-  bottom: unset;
-}
-
 .toast {
-  overflow: hidden;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -79,52 +33,51 @@ body {
   transition: all 0.35s cubic-bezier(0.25, 0.75, 0.6, 0.98),
     opacity 0.4s ease-in-out;
   border-radius: 0.5rem;
-  background-color: black;
-  color: white;
+  background-color: #03f;
   width: 320px;
   max-width: min(420px, 100vw - 48px);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  /* line-height: 21px; */
   padding: 16px;
   border-radius: 12px;
-  min-height: 63px;
-  font-size: 1rem;
-}
+  max-height: 63px;
 
-.toast.light {
-  color: #000000;
-  background-color: #ffffff;
+  font-size: 1.2rem;
 }
-.toast.light svg:hover {
-  color: black;
+.toast-hover-wrapper {
+  position: relative;
+  width: 100%;
+  height: 63px;
+  max-height: 220px;
+
+  /* pointer-events: none; */
+  /* background: red; */
 }
-.toast.light svg {
-  color: #0000005a;
+.toast-hover-wrapper:hover {
+  /* pointer-events: auto; */
+  height: 200px;
 }
 .toast.show {
   opacity: 1;
 }
-
 .toast:nth-child(1) {
   z-index: 3;
   box-shadow: 1px 2px 5px 1px rgba(0, 0, 0, 0.5);
   transform: translateY(0) scale(1);
 }
-
 .toast:nth-child(2) {
   z-index: 2;
   box-shadow: 1px 0px 4px 1px rgba(0, 0, 0, 0.4);
   transform: translateY(-10px) scale(0.9);
 }
-
 .toast:nth-child(3) {
   z-index: 1;
   box-shadow: 2px 4px 6px 4px rgba(0, 0, 0, 0.3);
   transform: translateY(-20px) scale(0.8);
 }
-
 .toast button {
   background: none;
   color: inherit;
@@ -137,95 +90,62 @@ body {
   height: 15px;
   background-color: rgba(0, 0, 0, 0);
 }
-
 .page-one {
   height: 100vh;
   width: 100vw;
 }
-
 .bg-cyan {
   width: 100vw;
   height: 100vh;
   background-color: aqua;
 }
-
 .bg-mint {
   width: 100vw;
   height: 100vh;
   background-color: #00fa9a;
 }
-
 .test-container-pages {
   height: 100%;
   width: 100%;
 }
-
 .toast-success {
   background-color: #0fa;
 }
-
 .toast-error {
   background-color: #ff4560;
 }
-
 .toast-warning {
   background-color: #fa4;
 }
-
 .toast-info {
   background-color: aqua;
 }
-
-.toast-success-border {
-  border: 0.3px solid #0fa;
-}
-
-.toast-error-border {
-  border: 0.3px solid #ff4560;
-}
-
-.toast-warning-border {
-  border: 0.3px solid #fa4;
-}
-
-.toast-info-border {
-  border: 0.3px solid aqua;
-}
-
 .progress-bar {
-  transition: width linear 0.5s;
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 2px;
-  background-color: rgb(255, 255, 255);
+  background-color: red;
   z-index: 1;
 }
-
 .toast-container.bottom-right {
   bottom: 20px;
   right: 20px;
 }
-
 .toast-container.bottom-left {
   bottom: 20px;
   left: 20px;
 }
-
 .toast-container.top-left {
-  top: 20px;
+  top: 80px;
   left: 20px;
 }
-
 .toast-container.top-right {
-  top: 20px;
+  top: 80px;
   right: 20px;
 }
-
 .toastifed-ltr {
   flex-direction: row;
 }
-
 .toastifed-rtl {
   flex-direction: row-reverse;
 }
@@ -233,13 +153,11 @@ body {
 .fade-out {
   animation: react-toastified-fadeOut 0.5s ease-in-out forwards;
 }
-
 @keyframes react-toastified-fadeOut {
   to {
     opacity: 0;
   }
 }
-
 .exit-left-out {
   animation: react-toastified-exit-right 0.75s
     cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
@@ -250,57 +168,32 @@ body {
     transform: translateX(100%);
   }
 }
-
 .toast-center-button {
   display: flex;
+  /* background-color: red; */
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
+/* 
+  .toast-container {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 9999;
+  } */
 
-.toast-container.top-center {
-  top: 20px;
+.toast-container.center-top {
+  top: 80px;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.toast-container.bottom-center {
+.toast-container.center-bottom {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-}
-
-.slide-left-fade-out {
-  animation: slideFadeOutLeft 0.5s ease-in-out forwards;
-}
-
-@keyframes slideFadeOutLeft {
-  to {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-}
-
-.slide-right-fade-out {
-  animation: slideFadeOutRight 0.5s ease-in-out forwards;
-}
-
-@keyframes slideFadeOutRight {
-  to {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-}
-
-.slide-fade-out-down {
-  animation: slideFadeOutDown 0.5s ease-in-out forwards;
-}
-
-@keyframes slideFadeOutDown {
-  to {
-    opacity: 0;
-    transform: translateY(100%);
-  }
 }
 
 .slide-fade-out-up {
@@ -313,7 +206,16 @@ body {
     transform: translateY(-100%);
   }
 }
+.slide-fade-out-down {
+  animation: slideFadeOutDown 0.5s ease-in-out forwards;
+}
 
+@keyframes slideFadeOutDown {
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
 .rotate-fade-out {
   animation: rotateFadeOut 0.5s ease-in-out forwards;
 }
@@ -336,48 +238,34 @@ body {
   }
 }
 
-.zoom-in {
-  animation: zoomIn 0.5s ease-in-out forwards;
-}
-
-@keyframes zoomIn {
-  from {
-    opacity: 0;
-    transform: scale(0);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
+/* ...Existing CSS */
 
 /* Custom CSS for top-positioned toasts */
-.toast-container.top-center:hover .toast,
+.toast-container.center-top:hover .toast,
 .toast-container.top-right:hover .toast,
 .toast-container.top-left:hover .toast {
   transform: translateY(0);
 }
-
-.toast-container.top-center:hover .toast:nth-child(1),
+.toast-container.center-top:hover .toast:nth-child(1),
 .toast-container.top-right:hover .toast:nth-child(1),
 .toast-container.top-left:hover .toast:nth-child(1) {
-  z-index: 3;
+  z-index: 1;
   transform: translateY(0) scale(1);
 }
-
-.toast-container.top-center:hover .toast:nth-child(2),
+.toast-container.center-top:hover .toast:nth-child(2),
 .toast-container.top-right:hover .toast:nth-child(2),
 .toast-container.top-left:hover .toast:nth-child(2) {
   z-index: 2;
   transform: translateY(130%) scale(1);
 }
-
-.toast-container.top-center:hover .toast:nth-child(3),
+.toast-container.center-top:hover .toast:nth-child(3),
 .toast-container.top-right:hover .toast:nth-child(3),
 .toast-container.top-left:hover .toast:nth-child(3) {
-  z-index: 1;
+  z-index: 3;
   transform: translateY(260%) scale(1);
 }
+
+/* /// new class names */
 
 .toast-default {
   background-color: #555555;
@@ -402,3 +290,5 @@ body {
 .toast-info {
   background-color: #00ffff;
 }
+
+/* /// strips  */
