@@ -22,258 +22,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // import React, {
-//   createContext,
-//   useContext,
-//   useState,
-//   useEffect,
-//   useRef,
-// } from "react";
-// const ToastContext = createContext();
-// function CloseIcon() {
-//   return (
-//     <svg
-//       width={40}
-//       height={40}
-//       viewBox="0 0 16 16"
-//       fill="none"
-//       xmlns="http://www.w3.org/2000/svg"
-//     >
-//       <path
-//         d="M12.8536 2.85355C13.0488 2.65829 13.0488 2.34171 12.8536 2.14645C12.6583 1.95118 12.3417 1.95118 12.1464 2.14645L7.5 6.79289L2.85355 2.14645C2.65829 1.95118 2.34171 1.95118 2.14645 2.14645C1.95118 2.34171 1.95118 2.65829 2.14645 2.85355L6.79289 7.5L2.14645 12.1464C1.95118 12.3417 1.95118 12.6583 2.14645 12.8536C2.34171 13.0488 2.65829 13.0488 2.85355 12.8536L7.5 8.20711L12.1464 12.8536C12.3417 13.0488 12.6583 13.0488 12.8536 12.8536C13.0488 12.6583 13.0488 12.3417 12.8536 12.1464L8.20711 7.5L12.8536 2.85355Z"
-//         fill="currentColor"
-//         fillRule="evenodd"
-//         clipRule="evenodd"
-//       ></path>
-//     </svg>
-//   );
-// }
-// export const useToast = () => {
-//   const context = useContext(ToastContext);
-//   if (!context) {
-//     throw new Error("useToast must be used within a ToastProvider");
-//   }
-//   return context;
-// };
-// export const TOAST_TYPES = {
-//   SUCCESS: "success",
-//   ERROR: "error",
-//   WARNING: "warning",
-//   INFO: "info",
-// };
-// const getOnLeaveClassName = (position) => {
-//   switch (position) {
-//     case "top-center":
-//       return "slide-fade-out-up";
-//     case "top-right":
-//       return "slide-right-fade-out";
-//     case "top-left":
-//       return "slide-left-fade-out";
-//     case "bottom-left":
-//       return "slide-left-fade-out";
-//     case "bottom-center":
-//       return "slide-fade-out-down";
-//     case "bottom-right":
-//       return "slide-right-fade-out";
-//     default:
-//       return "";
-//   }
-// };
-// function ToastItem({
-//   toast,
-//   index,
-//   visibleToasts,
-//   removeToast,
-//   toastContainerPosition,
-//   progress,
-// }) {
-//   const cssClasses = `toast toast-${index} ${
-//     visibleToasts.includes(toast.id) ? "show" : ""
-//   } ${
-//     toast.isLeaving
-//       ? `fade-out ${getOnLeaveClassName(toastContainerPosition)}`
-//       : ""
-//   } ${toast?.theme} ${toast.rtl ? "toastifed-rtl" : "toastifed-ltr"} ${
-//     toastContainerPosition.includes("top") && "unset-bottom"
-//   } ${toast.classNames} ${getToastClass(toast.type)}-border `.trim();
-//   function getToastClass(type, variation = "default") {
-//     let baseClass = "toast-";
-//     switch (type) {
-//       case "success":
-//         baseClass += "success";
-//         break;
-//       case "error":
-//         baseClass += "error";
-//         break;
-//       case "warning":
-//         baseClass += "warning";
-//         break;
-//       case "info":
-//         baseClass += "info";
-//         break;
-//       default:
-//         return "Invalid type";
-//     }
-//     if (variation !== "default") {
-//       baseClass += `-variation${variation}`;
-//     }
-//     return baseClass;
-//   }
-//   return (
-//     <div key={toast.id} className={cssClasses} style={toast.style}>
-//       {toast.duration && (
-//         <div
-//           className={`progress-bar ${getToastClass(toast.type)}`}
-//           style={{ width: `${progress}%` }}
-//         ></div>
-//       )}
-//       <div className={`message`} style={{ position: "relative", zIndex: 2 }}>
-//         {toast.message}
-//       </div>
-//       <button
-//         onClick={() => removeToast(toast.id)}
-//         className="toast-center-button"
-//       >
-//         <CloseIcon />
-//       </button>
-//     </div>
-//   );
-// }
-// export const ToastProvider = ({ children }) => {
-//   const [toasts, setToasts] = useState([]);
-//   const [visibleToasts, setVisibleToasts] = useState([]);
-//   const [queue, setQueue] = useState([]);
-//   const [toastContainerPosition, setToastContainerPosition] =
-//     useState("bottom-right");
-//   const [isHovered, setIsHovered] = useState(false);
-//   const [progressMap, setProgressMap] = useState({});
-//   useEffect(() => {
-//     if (toasts.length > 3) {
-//       setQueue(toasts.slice(0, -3));
-//       setVisibleToasts(toasts.slice(-3).map((t) => t.id));
-//     } else {
-//       setVisibleToasts(toasts.map((t) => t.id));
-//     }
-//   }, [toasts]);
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       if (!isHovered) {
-//         setProgressMap((prevProgressMap) => {
-//           const newProgressMap = { ...prevProgressMap };
-//           Object.keys(newProgressMap).forEach((toastId) => {
-//             if (visibleToasts.includes(parseInt(toastId))) {
-//               newProgressMap[toastId] -=
-//                 100 /
-//                 (toasts.find((t) => t.id === parseInt(toastId)).duration / 100);
-//               if (newProgressMap[toastId] <= 0) {
-//                 removeToast(parseInt(toastId));
-//                 delete newProgressMap[toastId];
-//               }
-//             }
-//           });
-//           return newProgressMap;
-//         });
-//       }
-//     }, 100);
-//     return () => clearInterval(interval);
-//   }, [isHovered, visibleToasts, toasts]);
-//   const addToast = (message, options = {}) => {
-//     const {
-//       type = TOAST_TYPES.INFO,
-//       style = {},
-//       duration = 7000,
-//       position,
-//       theme = "dark",
-//       rtl = false,
-//       colorVariation = null,
-//     } = options;
-//     try {
-//       if (position) {
-//         setToastContainerPosition(position);
-//       }
-//     } catch (error) {
-//       console.error(error.message);
-//     }
-//     const id = new Date().getTime();
-//     setToasts([
-//       ...toasts,
-//       {
-//         id,
-//         theme,
-//         message,
-//         type,
-//         style,
-//         duration,
-//         isLeaving: false,
-//         rtl,
-//         colorVariation,
-//       },
-//     ]);
-//     setProgressMap((prevProgressMap) => ({
-//       ...prevProgressMap,
-//       [id]: 100,
-//     }));
-//   };
-//   const removeToast = (id) => {
-//     setToasts((prevToasts) => {
-//       return prevToasts.map((toast) => {
-//         if (toast.id === id) {
-//           return {
-//             ...toast,
-//             isLeaving: true,
-//           };
-//         } else {
-//           return toast;
-//         }
-//       });
-//     });
-//     setTimeout(() => {
-//       setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
-//       setProgressMap((prevProgressMap) => {
-//         const newProgressMap = { ...prevProgressMap };
-//         delete newProgressMap[id];
-//         return newProgressMap;
-//       });
-//       if (queue.length > 0) {
-//         const nextToast = queue[0];
-//         setQueue((prevQueue) => prevQueue.slice(1));
-//         setVisibleToasts((prevVisibleToasts) => [
-//           ...prevVisibleToasts,
-//           nextToast.id,
-//         ]);
-//       }
-//     }, 500);
-//   };
-//   const handleMouseEnter = () => {
-//     setIsHovered(true);
-//   };
-//   const handleMouseLeave = () => {
-//     setIsHovered(false);
-//   };
-//   return (
-//     <ToastContext.Provider value={{ addToast, removeToast, setToasts, toasts }}>
-//       {children}
-//       <div
-//         className={`toast-container ${toastContainerPosition}`}
-//         onMouseEnter={handleMouseEnter}
-//         onMouseLeave={handleMouseLeave}
-//       >
-//         {[...toasts].reverse().map((toast, index) => (
-//           <ToastItem
-//             key={toast.id}
-//             toast={toast}
-//             index={index}
-//             toastContainerPosition={toastContainerPosition}
-//             visibleToasts={visibleToasts}
-//             removeToast={removeToast}
-//             isHovered={isHovered}
-//             progress={progressMap[toast.id]}
-//           />
-//         ))}
-//       </div>
-//     </ToastContext.Provider>
-//   );
-// };
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ToastContext = /*#__PURE__*/(0, _react.createContext)();
 function CloseIcon() {
   return /*#__PURE__*/_react["default"].createElement("svg", {
@@ -326,7 +75,8 @@ function ToastItem(_ref) {
     visibleToasts = _ref.visibleToasts,
     removeToast = _ref.removeToast,
     toastContainerPosition = _ref.toastContainerPosition,
-    progress = _ref.progress;
+    progress = _ref.progress,
+    coloredMode = _ref.coloredMode;
   var cssClasses = "toast toast-".concat(index, " ").concat(visibleToasts.includes(toast.id) ? "show" : "", " ").concat(toast.isLeaving ? "fade-out ".concat(getOnLeaveClassName(toastContainerPosition)) : "", " ").concat(toast === null || toast === void 0 ? void 0 : toast.theme, " ").concat(toast.rtl ? "toastifed-rtl" : "toastifed-ltr", " ").concat(toastContainerPosition.includes("top") && "unset-bottom", " ").concat(toast.classNames, " ").concat(getToastClass(toast.type), "-border ").trim();
   function getToastClass(type) {
     var variation = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "default";
@@ -348,13 +98,13 @@ function ToastItem(_ref) {
         return "Invalid type";
     }
     if (variation !== "default") {
-      baseClass += "-variation".concat(variation);
+      baseClass += "-".concat(variation);
     }
     return baseClass;
   }
   return /*#__PURE__*/_react["default"].createElement("div", {
     key: toast.id,
-    className: cssClasses,
+    className: "".concat(cssClasses, " ").concat(coloredMode ? getToastClass(toast.type, "colored") : ""),
     style: toast.style
   }, toast.duration && /*#__PURE__*/_react["default"].createElement("div", {
     className: "progress-bar ".concat(getToastClass(toast.type)),
@@ -375,7 +125,9 @@ function ToastItem(_ref) {
   }, /*#__PURE__*/_react["default"].createElement(CloseIcon, null)));
 }
 var ToastProvider = exports.ToastProvider = function ToastProvider(_ref2) {
-  var children = _ref2.children;
+  var children = _ref2.children,
+    _ref2$coloredMode = _ref2.coloredMode,
+    coloredMode = _ref2$coloredMode === void 0 ? false : _ref2$coloredMode;
   var _useState = (0, _react.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     toasts = _useState2[0],
@@ -537,7 +289,8 @@ var ToastProvider = exports.ToastProvider = function ToastProvider(_ref2) {
       visibleToasts: visibleToasts,
       removeToast: removeToast,
       isHovered: isHovered,
-      progress: progressMap[toast.id]
+      progress: progressMap[toast.id],
+      coloredMode: coloredMode
     });
   })));
 };

@@ -66,6 +66,7 @@ function ToastItem({
   removeToast,
   toastContainerPosition,
   progress,
+  coloredMode,
 }) {
   const cssClasses = `toast toast-${index} ${
     visibleToasts.includes(toast.id) ? "show" : ""
@@ -98,14 +99,20 @@ function ToastItem({
     }
 
     if (variation !== "default") {
-      baseClass += `-variation${variation}`;
+      baseClass += `-${variation}`;
     }
 
     return baseClass;
   }
 
   return (
-    <div key={toast.id} className={cssClasses} style={toast.style}>
+    <div
+      key={toast.id}
+      className={`${cssClasses} ${
+        coloredMode ? getToastClass(toast.type, "colored") : ""
+      }`}
+      style={toast.style}
+    >
       {toast.duration && (
         <div
           className={`progress-bar ${getToastClass(toast.type)}`}
@@ -125,7 +132,7 @@ function ToastItem({
   );
 }
 
-export const ToastProvider = ({ children }) => {
+export const ToastProvider = ({ children, coloredMode = false }) => {
   const [toasts, setToasts] = useState([]);
   const [visibleToasts, setVisibleToasts] = useState([]);
   const [queue, setQueue] = useState([]);
@@ -266,6 +273,7 @@ export const ToastProvider = ({ children }) => {
             removeToast={removeToast}
             isHovered={isHovered}
             progress={progressMap[toast.id]}
+            coloredMode={coloredMode}
           />
         ))}
       </div>
