@@ -35,8 +35,9 @@ export default function DevelopmentComponent() {
     addToast(`This is a ${toastType} toast number ${count}!`, {
       type: toastType,
       rtl: false,
-      // theme: "dark",
-      // duration: 4000,
+
+      theme: "colored",
+      duration: 4000,
       position: position,
     });
   };

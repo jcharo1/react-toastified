@@ -154,7 +154,7 @@ body {
   background-color: aqua;
 }
 
-.toast-success-border {
+/* .toast-success-border {
   border: 0.3px solid #0fa;
 }
 
@@ -168,7 +168,7 @@ body {
 
 .toast-info-border {
   border: 0.3px solid aqua;
-}
+} */
 
 .progress-bar {
   transition: width linear 0.5s;
@@ -176,7 +176,6 @@ body {
   bottom: 0;
   left: 0;
   height: 2px;
-  background-color: rgb(255, 255, 255);
   z-index: 1;
 }
 
