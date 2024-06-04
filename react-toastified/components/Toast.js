@@ -272,19 +272,21 @@ export const ToastProvider = ({ children }) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {[...toasts].reverse().map((toast, index) => (
-          <ToastItem
-            key={toast.id}
-            toast={toast}
-            index={index}
-            toastContainerPosition={toastContainerPosition}
-            visibleToasts={visibleToasts}
-            removeToast={removeToast}
-            isHovered={isHovered}
-            progress={progressMap[toast.id]}
-            coloredMode={coloredMode}
-          />
-        ))}
+        <div className="toast-hover-wrapper">
+          {[...toasts].reverse().map((toast, index) => (
+            <ToastItem
+              key={toast.id}
+              toast={toast}
+              index={index}
+              toastContainerPosition={toastContainerPosition}
+              visibleToasts={visibleToasts}
+              removeToast={removeToast}
+              isHovered={isHovered}
+              progress={progressMap[toast.id]}
+              coloredMode={coloredMode}
+            />
+          ))}
+        </div>
       </div>
     </ToastContext.Provider>
   );
