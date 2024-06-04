@@ -25,7 +25,7 @@ export default function DevelopmentComponent() {
   const [position, setPosition] = useState("top-right");
   const { addToast } = useToast();
   const [count, setCount] = useState(0);
-
+  const [theme, setTheme] = useState("dark");
   const tryToast = () => {
     console.log("tryToast");
     setCount(count + 1);
@@ -35,9 +35,22 @@ export default function DevelopmentComponent() {
     addToast(`This is a ${toastType} toast number ${count}!`, {
       type: toastType,
       rtl: false,
-      // theme: "dark",
+
+      theme: theme,
       // duration: 4000,
       position: position,
+    });
+  };
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => {
+      if (prevTheme === "light") {
+        return "dark";
+      } else if (prevTheme === "dark") {
+        return "colored";
+      } else {
+        return "light";
+      }
     });
   };
 
@@ -53,7 +66,14 @@ export default function DevelopmentComponent() {
             <div className="overflow-hidden rounded-lg bg-transparent shadow ">
               <div className="p-6">
                 <div className="w-3/4 p-4">
-                  <h1 className="text-2xl font-bold mb-4"></h1>
+                  <h1 className="text-2xl font-bold mb-4"></h1>{" "}
+                  <button
+                    className="mr-2 p-2 bg-blue-500 text-white rounded"
+                    onClick={toggleTheme}
+                  >
+                    Toggle Theme
+                  </button>
+                  <p>current theme: : {theme}</p>
                   <div>
                     <button
                       className="mr-2 p-2 bg-blue-500 text-white rounded"

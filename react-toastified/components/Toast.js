@@ -105,6 +105,11 @@ function ToastItem({
     return baseClass;
   }
 
+  const progressBarColor = coloredMode
+    ? toast.theme === "light"
+      ? "black"
+      : "white"
+    : getToastClass(toast.type);
   return (
     <div
       key={toast.id}
@@ -116,7 +121,7 @@ function ToastItem({
       {toast.duration && (
         <div
           className={`progress-bar ${getToastClass(toast.type)}`}
-          style={{ width: `${progress}%` }}
+          style={{ width: `${progress}%`, backgroundColor: progressBarColor }}
         ></div>
       )}
       <div className={`message`} style={{ position: "relative", zIndex: 2 }}>
@@ -132,7 +137,7 @@ function ToastItem({
   );
 }
 
-export const ToastProvider = ({ children, coloredMode = false }) => {
+export const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
   const [visibleToasts, setVisibleToasts] = useState([]);
   const [queue, setQueue] = useState([]);
@@ -140,7 +145,7 @@ export const ToastProvider = ({ children, coloredMode = false }) => {
     useState("bottom-right");
   const [isHovered, setIsHovered] = useState(false);
   const [progressMap, setProgressMap] = useState({});
-
+  const [coloredMode, setColormode] = useState(false);
   useEffect(() => {
     if (toasts.length > 3) {
       setQueue(toasts.slice(0, -3));
@@ -183,6 +188,10 @@ export const ToastProvider = ({ children, coloredMode = false }) => {
       rtl = false,
       colorVariation = null,
     } = options;
+    if (theme === "colored") setColormode(true);
+    else {
+      setColormode(false);
+    }
     try {
       if (position) {
         setToastContainerPosition(position);
@@ -263,19 +272,21 @@ export const ToastProvider = ({ children, coloredMode = false }) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {[...toasts].reverse().map((toast, index) => (
-          <ToastItem
-            key={toast.id}
-            toast={toast}
-            index={index}
-            toastContainerPosition={toastContainerPosition}
-            visibleToasts={visibleToasts}
-            removeToast={removeToast}
-            isHovered={isHovered}
-            progress={progressMap[toast.id]}
-            coloredMode={coloredMode}
-          />
-        ))}
+        <div className="toast-hover-wrapper">
+          {[...toasts].reverse().map((toast, index) => (
+            <ToastItem
+              key={toast.id}
+              toast={toast}
+              index={index}
+              toastContainerPosition={toastContainerPosition}
+              visibleToasts={visibleToasts}
+              removeToast={removeToast}
+              isHovered={isHovered}
+              progress={progressMap[toast.id]}
+              coloredMode={coloredMode}
+            />
+          ))}
+        </div>
       </div>
     </ToastContext.Provider>
   );
