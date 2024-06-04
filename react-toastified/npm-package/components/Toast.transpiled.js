@@ -102,6 +102,7 @@ function ToastItem(_ref) {
     }
     return baseClass;
   }
+  var progressBarColor = coloredMode ? toast.theme === "light" ? "black" : "white" : getToastClass(toast.type);
   return /*#__PURE__*/_react["default"].createElement("div", {
     key: toast.id,
     className: "".concat(cssClasses, " ").concat(coloredMode ? getToastClass(toast.type, "colored") : ""),
@@ -109,7 +110,8 @@ function ToastItem(_ref) {
   }, toast.duration && /*#__PURE__*/_react["default"].createElement("div", {
     className: "progress-bar ".concat(getToastClass(toast.type)),
     style: {
-      width: "".concat(progress, "%")
+      width: "".concat(progress, "%"),
+      backgroundColor: progressBarColor
     }
   }), /*#__PURE__*/_react["default"].createElement("div", {
     className: "message",
@@ -125,9 +127,7 @@ function ToastItem(_ref) {
   }, /*#__PURE__*/_react["default"].createElement(CloseIcon, null)));
 }
 var ToastProvider = exports.ToastProvider = function ToastProvider(_ref2) {
-  var children = _ref2.children,
-    _ref2$coloredMode = _ref2.coloredMode,
-    coloredMode = _ref2$coloredMode === void 0 ? false : _ref2$coloredMode;
+  var children = _ref2.children;
   var _useState = (0, _react.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     toasts = _useState2[0],
@@ -152,6 +152,10 @@ var ToastProvider = exports.ToastProvider = function ToastProvider(_ref2) {
     _useState12 = _slicedToArray(_useState11, 2),
     progressMap = _useState12[0],
     setProgressMap = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    coloredMode = _useState14[0],
+    setColormode = _useState14[1];
   (0, _react.useEffect)(function () {
     if (toasts.length > 3) {
       setQueue(toasts.slice(0, -3));
@@ -204,6 +208,9 @@ var ToastProvider = exports.ToastProvider = function ToastProvider(_ref2) {
       rtl = _options$rtl === void 0 ? false : _options$rtl,
       _options$colorVariati = options.colorVariation,
       colorVariation = _options$colorVariati === void 0 ? null : _options$colorVariati;
+    if (theme === "colored") setColormode(true);else {
+      setColormode(false);
+    }
     try {
       if (position) {
         setToastContainerPosition(position);
@@ -280,6 +287,8 @@ var ToastProvider = exports.ToastProvider = function ToastProvider(_ref2) {
     className: "toast-container ".concat(toastContainerPosition),
     onMouseEnter: handleMouseEnter,
     onMouseLeave: handleMouseLeave
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "toast-hover-wrapper"
   }, _toConsumableArray(toasts).reverse().map(function (toast, index) {
     return /*#__PURE__*/_react["default"].createElement(ToastItem, {
       key: toast.id,
@@ -292,5 +301,5 @@ var ToastProvider = exports.ToastProvider = function ToastProvider(_ref2) {
       progress: progressMap[toast.id],
       coloredMode: coloredMode
     });
-  })));
+  }))));
 };
