@@ -1,0 +1,15 @@
+!npm-package
+node_modules
+.git
+.next
+components
+pages
+public
+styles
+tests
+.babelrc
+.eslintrc.json
+next.config.js
+tsconfig.json
+package-lock.json
+tailwind.config.js
