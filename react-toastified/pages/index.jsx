@@ -32,6 +32,14 @@ export default function DevelopmentComponent() {
     if (count >= 10) {
       setCount(0);
     }
+    console.log("toastsetttings", {
+      type: toastType,
+      rtl: false,
+
+      theme: theme,
+      // duration: 4000,
+      position: position,
+    });
     addToast(`This is a ${toastType} toast number ${count}!`, {
       type: toastType,
       rtl: false,
