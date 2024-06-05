@@ -5,7 +5,6 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import "../styles/Toast.css";
 const ToastContext = createContext();
 
 function CloseIcon() {
