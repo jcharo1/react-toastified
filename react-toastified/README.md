@@ -4,136 +4,207 @@
 ![npm](https://img.shields.io/npm/dm/react-toastified)
 ![NPM](https://img.shields.io/npm/l/react-toastified)
 
-# 🍞✨ React-Toastified — Get Your Notifications Toasty!
+# React Toastified
 
-Elevate the UX of your React apps with toasts that are as informative as they are delicious.
+An easy-to-use, customizable toast notification system for React apps.
 
----
+## Features
 
-## 🚀 Quick Intro
+- Multiple toast types: Success, Error, Warning, Info
+- Customizable positions: top-center, top-right, top-left, bottom-center, bottom-right, bottom-left
+- Customizable themes: light, dark, colored
+- Progress bar for toasts with durations
+- Right-to-left (RTL) support
+- Multiple animations for toast entrance and exit
+- Queueing system for displaying multiple toasts
 
-Why settle for boring alerts when you can have toast? React-Toastified serves up a feast of eye-catching notifications with zero hassle. Hover over and feel the warmth of our interactive toasts. More style, less stress. Let's get toastified! 🥂
-
----
-
-## 🔥 What’s Cooking?
-
-- 🎉 **Flavorsome Toast Types**: Success, Error, Warning, and Info.
-- 🌌 Hover & Glow: Experience the magical hover effect that makes your notifications pop!
-- 👔 **Tailor-Made**: Spice up your toasts with custom styles, durations, and more.
-- 🛠️ **Plug 'n' Play**: Pairs perfectly with any React dish.
-
----
-
-## 📦 Pantry Essentials (Installation)
-
-You can add this package to your project using npm or yarn:
+## Installation
 
 ```bash
 npm install react-toastified
-
-# or if you're a yarn fan
-
-yarn add react-toastified
 ```
 
----
+## Usage
 
-## 🛠️ Cooking Time (Usage)
+### Basic Setup
 
-Before cooking up some toasts, wrap your root component in `ToastProvider`.
+Wrap your application with the `ToastProvider`:
 
 ```jsx
-import App from "./App";
+import React from "react";
 import { ToastProvider } from "react-toastified";
+import "react-toastified/npm-package/styles/Toast.min.css";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <ToastProvider>
-      <App />
-    </ToastProvider>
-  </React.StrictMode>
-);
-```
-
-### 🍞 Basic Toast Recipe
-
-Triggering a simple info toast is as easy as pie!
-
-```jsx
-import { useToast } from "react-toastified";
-
-function MyComponent() {
-  const { addToast } = useToast();
-
-  const handleClick = () => {
-    addToast("Hey, check this out! Info toast, coming right up!");
-  };
-
-  return <button onClick={handleClick}>Serve Toast</button>;
-}
-```
-
-### 🌈 Rainbow of Toasts
-
-Why stick to one flavor when you can have them all? 🌈
-
-```jsx
-function MyComponent() {
-  const { addToast } = useToast();
-  const toastTypes = ["info", "success", "error", "warning"];
-
-  const handleClick = (type) => {
-    addToast(`A fresh ${type} toast, just for you!`, {
-      type,
-      position:"bottom-right" // Default is bottom-right , full list of position arguments  are ['bottom-right', 'bottom-left', 'top-left', 'top-right']
-      style: {
-        color: "black",
-        // backgroundColor: "pink", // Add some flair with custom styles
-        // padding: "24px"
-      },
-    });
-  };
-
+function App() {
   return (
-    <>
-      {toastTypes.map((type) => (
-        <button onClick={() => handleClick(type)}>Serve {type} Toast</button>
-      ))}
-    </>
+    <ToastProvider theme="dark">
+      <MyComponent />
+    </ToastProvider>
   );
 }
 ```
 
-### 🎨 Garnish Your Toast
+### Creating a Toast
 
-Add some jazz to your toasts with custom options.
+Use the `toast` object to create toasts:
 
-```javascript
-import { useToast } from "react-toastified";
+```jsx
+import React from "react";
+import { toast } from "react-toastified";
+import "react-toastified/npm-package/styles/Toast.min.css";
 
-const { addToast } = useToast();
-addToast("Yay! You did it!", { type: "success" });
-addToast("Oops! Something went wrong.", { type: "error" });
+function MyComponent() {
+  const showToast = () => {
+    toast.success("This is a success message!", {
+      duration: 3000,
+      position: "top-right",
+      theme: "light",
+    });
+  };
+
+  return (
+    <div>
+      <button onClick={showToast}>Show Toast</button>
+    </div>
+  );
+}
 ```
 
+## Customization
+
+### Toast Types
+
+Available toast types are defined in `toast`:
+
+- `toast.success`
+- `toast.error`
+- `toast.warning`
+- `toast.info`
+
+### Positions
+
+Toasts can be positioned in the following areas:
+
+- `top-center`
+- `top-right`
+- `top-left`
+- `bottom-center`
+- `bottom-right`
+- `bottom-left`
+
+### Themes
+
+Toasts can have different themes:
+
+- `dark` (default)
+- `light`
+- `colored`
+
+### Right-to-Left (RTL) Support
+
+Enable RTL support by setting the `rtl` option to `true`:
+
+```jsx
+toast.success("This is a success message!", {
+  duration: 3000,
+  position: "top-right",
+  rtl: true,
+});
+```
+
+### Custom Class Names
+
+Add custom class names to the toast for additional styling:
+
+```jsx
+toast.info("Custom styled toast", {
+  classNames: "custom-toast",
+});
+```
+
+### Progress Bar
+
+Toasts with a duration will automatically show a progress bar:
+
+```jsx
+toast.info("Toast with progress bar", {
+  duration: 5000,
+});
+```
+
+## Animations
+
+Toasts can have different animations based on their position:
+
+- `slide-fade-out-up`
+- `slide-right-fade-out`
+- `slide-left-fade-out`
+- `slide-fade-out-down`
+
+These are automatically applied based on the toast's position.
+
+## Complete Example
+
+```jsx
+import React from "react";
+import { ToastProvider } from "react-toastified";
+import { toast, Toast } from "react-toastified";
+import "react-toastified/styles/Toast.min.css";
+
+function App() {
+  const showSuccessToast = () => {
+    toast.success("This is a success message!", {
+      duration: 3000,
+      position: "top-right",
+      theme: "light",
+      classNames: "custom-toast",
+      rtl: true,
+    });
+  };
+
+  const showErrorToast = () => {
+    toast.error("This is an error message!", {
+      duration: 3000,
+      position: "bottom-left",
+      theme: "colored",
+    });
+  };
+
+  return (
+    <ToastProvider theme="dark">
+      <Toast />
+      <div>
+        <button onClick={showSuccessToast}>Show Success Toast</button>
+        <button onClick={showErrorToast}>Show Error Toast</button>
+      </div>
+    </ToastProvider>
+  );
+}
+
+export default App;
+```
+
+## CSS Customization
+
+You can further customize the toasts using CSS. The following class names are available for styling:
+
+- `.toast-container`
+- `.toast`
+- `.toast-success`
+- `.toast-error`
+- `.toast-warning`
+- `.toast-info`
+- `.toast-success-colored`
+- `.toast-error-colored`
+- `.toast-warning-colored`
+- `.toast-info-colored`
+- `.progress-bar`
+
 ---
 
-## 🌈 Coming Up Next!
+This documentation provides a comprehensive overview of how to use and customize the React Toastified package. If you have any questions or encounter issues, please refer to the [GitHub repository](https://github.com/jcharo1/react-toastified) for further information and support.
 
-- 🚀 Action buttons for your toasts
-- 🎨 Even more ways to customize
-
----
-
-## 🤝 Share Your Recipes (Contributions)
-
-If you’ve got some zesty ideas, we’re all ears! Issue reports, feature requests, and contributions are always welcome. Let's make some toast magic together!
-
----
-
-💌 Lovingly baked by [@jcharo], seasoned with inspiration from Vercel Notification.
+💌 baked by [@jcharo], seasoned with inspiration from Vercel Notification.
 
 ## Also Check Out My Other Package 🌟
 

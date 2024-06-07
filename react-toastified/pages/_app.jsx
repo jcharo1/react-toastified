@@ -1,8 +1,8 @@
 import "../styles/globals.css";
-import { ToastProvider } from "@/components/Toast";
+import { ToastProvider } from "@/components/ToastProvider";
 export default function App({ Component, pageProps }) {
   return (
-    <ToastProvider coloredMode={false}>
+    <ToastProvider theme={"colored"}>
       <Component {...pageProps} />
     </ToastProvider>
   );

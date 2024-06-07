@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useToast } from "@/components/Toast";
+import { toast } from "@/components/ToastProvider";
 
 const getOnLeaveClassName = (position) => {
   switch (position) {
@@ -23,7 +23,6 @@ const getOnLeaveClassName = (position) => {
 export default function DevelopmentComponent() {
   const [toastType, setToastType] = useState("info");
   const [position, setPosition] = useState("top-right");
-  const { addToast } = useToast();
   const [count, setCount] = useState(0);
   const [theme, setTheme] = useState("dark");
   const tryToast = () => {
@@ -40,14 +39,38 @@ export default function DevelopmentComponent() {
       // duration: 4000,
       position: position,
     });
-    addToast(`This is a ${toastType} toast number ${count}!`, {
-      type: toastType,
-      rtl: false,
-
-      theme: theme,
-      // duration: 4000,
-      position: position,
-    });
+    switch (toastType) {
+      case "info":
+        toast.info("This is an info message!", {
+          duration: 1000000,
+          position: position,
+          theme: theme,
+        });
+        break;
+      case "success":
+        toast.success("This is a success message!", {
+          duration: 1000000,
+          position: position,
+          theme: theme,
+        });
+        break;
+      case "error":
+        toast.error("This is an error message!", {
+          duration: 1000000,
+          position: position,
+          theme: theme,
+        });
+        break;
+      case "warning":
+        toast.warning("This is a warning message!", {
+          duration: 1000000,
+          position: position,
+          theme: theme,
+        });
+        break;
+      default:
+        break;
+    }
   };
 
   const toggleTheme = () => {

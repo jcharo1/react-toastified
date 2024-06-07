@@ -2,10 +2,10 @@
   "name": "react-toastified",
   "version": "3.0.15",
   "description": "An easy-to-use, customizable toast notification system for React apps",
-  "main": "./npm-package/components/Toast.min.js",
+  "main": "./npm-package/components/ToastProvider.min.js",
   "scripts": {
     "dev": "next dev",
-    "prepare-package": "mkdir -p npm-package/components && mkdir -p npm-package/styles && cp -r ./components/* npm-package/components/ && cp styles/Toast.css npm-package/styles/Toast.css && babel ./components/Toast.js --out-file ./npm-package/components/Toast.transpiled.js && terser ./npm-package/components/Toast.transpiled.js -o ./npm-package/components/Toast.min.js && postcss ./styles/Toast.css -o ./npm-package/styles/Toast.min.css"
+    "prepare-package": "mkdir -p npm-package/components && mkdir -p npm-package/styles && cp -r ./components/* npm-package/components/ && babel ./npm-package/components --out-dir ./npm-package/components --extensions \".js,.jsx\" && terser ./npm-package/components/ToastProvider.js -o ./npm-package/components/ToastProvider.min.js && postcss ./styles/Toast.css -o ./npm-package/styles/Toast.min.css"
   },
   "keywords": [
     "react",
