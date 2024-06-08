@@ -141,7 +141,7 @@ export const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
   const [visibleToasts, setVisibleToasts] = useState([]);
   const [queue, setQueue] = useState([]);
-  const [toastContainerPosition, setToastContainerPosition] =
+  const [toastContainerPosition, sfetToastContainerPosition] =
     useState("bottom-right");
   const [isHovered, setIsHovered] = useState(false);
   const [progressMap, setProgressMap] = useState({});

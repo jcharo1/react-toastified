@@ -246,7 +246,12 @@ body {
     transform: translateX(100%);
   }
 }
-
+.react-toastified-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
 .toast-center-button {
   display: flex;
   justify-content: center;
