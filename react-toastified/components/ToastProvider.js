@@ -6,6 +6,7 @@
 //   SUCCESS: "success",
 //   ERROR: "error",
 //   WARNING: "warning",
+//   INFO: "info",
 // };
 
 // let globalTheme = "dark";
@@ -385,15 +386,20 @@ const getOnLeaveClassName = (position) => {
 };
 
 const getDefaultIcon = (type) => {
+  let color;
   switch (type) {
     case TOAST_TYPES.SUCCESS:
-      return <SuccessIcon />;
+      color = "#00ff00";
+      return <SuccessIcon color={color} />;
     case TOAST_TYPES.ERROR:
-      return <ErrorIcon />;
+      color = "#ff0000";
+      return <ErrorIcon color={color} />;
     case TOAST_TYPES.WARNING:
-      return <WarningIcon />;
+      color = "#ffff00";
+      return <WarningIcon color={color} />;
     case TOAST_TYPES.INFO:
-      return <InfoIcon />;
+      color = "#00ffff";
+      return <InfoIcon color={color} />;
     default:
       return null;
   }
@@ -673,7 +679,7 @@ export const ToastProvider = ({
 // Export toast for global use
 export const toast = {};
 
-function CloseIcon() {
+function CloseIcon({ color }) {
   return (
     <svg
       width={40}
@@ -692,11 +698,11 @@ function CloseIcon() {
   );
 }
 
-function SuccessIcon() {
+function SuccessIcon({ color }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      fill={color}
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       width={20}
@@ -713,11 +719,11 @@ function SuccessIcon() {
   );
 }
 
-function ErrorIcon() {
+function ErrorIcon({ color }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      fill={color}
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       width={20}
@@ -734,16 +740,16 @@ function ErrorIcon() {
   );
 }
 
-function WarningIcon() {
+function WarningIcon({ color }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      // strokeWidth={1.5}
+      strokeWidth={0.5}
       width={20}
       height={20}
-      fill="currentColor"
-      // stroke="currentColor"
+      fill={color}
+      stroke="currentColor"
       className="size-6"
     >
       <path
@@ -755,11 +761,11 @@ function WarningIcon() {
   );
 }
 
-function InfoIcon() {
+function InfoIcon({ color }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      fill={color}
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
