@@ -477,12 +477,14 @@ function ToastItem({
         {toast.icon || getDefaultIcon(toast.type)}
         {toast.message}
       </div>
-      <button
-        onClick={() => removeToast(toast.id)}
-        className="toast-center-button"
-      >
-        <CloseIcon />
-      </button>
+      <div className="toast-close-button-wrapper">
+        <button
+          onClick={() => removeToast(toast.id)}
+          className="toast-center-button"
+        >
+          <CloseIcon />
+        </button>{" "}
+      </div>
     </div>
   );
 }
@@ -682,8 +684,8 @@ export const toast = {};
 function CloseIcon({ color }) {
   return (
     <svg
-      width={40}
-      height={40}
+      width={16}
+      height={16}
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -702,13 +704,16 @@ function SuccessIcon({ color }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill={color}
+      // fill={color}
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       width={20}
       height={20}
-      stroke="currentColor"
+      // stroke="currentColor"
       className="size-6"
+      stroke={color}
+      fill={`none`}
+      shapeRendering="geometricPrecision"
     >
       <path
         strokeLinecap="round"
@@ -723,12 +728,15 @@ function ErrorIcon({ color }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill={color}
+      stroke={color}
+      fill={`none`}
+      //  stroke="currentColor"
+      // fill={color}
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       width={20}
       height={20}
-      stroke="currentColor"
+      shapeRendering="geometricPrecision"
       className="size-6"
     >
       <path
@@ -740,22 +748,44 @@ function ErrorIcon({ color }) {
   );
 }
 
+// function WarningIcon({ color }) {
+//   return (
+//     <svg
+//       xmlns="http://www.w3.org/2000/svg"
+//       viewBox="0 0 24 24"
+//       strokeWidth={0.5}
+//       width={20}
+//       height={20}
+//       fill={color}
+//       stroke="currentColor"
+//       className="size-6"
+//     >
+//       <path
+//         strokeLinecap="round"
+//         strokeLinejoin="round"
+//         d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+//       />
+//     </svg>
+//   );
+// }
 function WarningIcon({ color }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      strokeWidth={0.5}
+      strokeWidth={1}
       width={20}
       height={20}
-      fill={color}
-      stroke="currentColor"
+      stroke={color}
+      fill={`none`}
       className="size-6"
+      shapeRendering="geometricPrecision"
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+        vectorEffect="non-scaling-stroke"
       />
     </svg>
   );
@@ -765,12 +795,15 @@ function InfoIcon({ color }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill={color}
+      // fill={color}
+      stroke={color}
+      fill={`none`}
       viewBox="0 0 24 24"
       strokeWidth={1.5}
-      stroke="currentColor"
+      // stroke="currentColor"
       width={20}
       height={20}
+      shapeRendering="geometricPrecision"
       className="size-6"
     >
       <path
