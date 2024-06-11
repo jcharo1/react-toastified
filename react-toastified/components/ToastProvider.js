@@ -385,21 +385,21 @@ const getOnLeaveClassName = (position) => {
   }
 };
 
-const getDefaultIcon = (type) => {
+const getDefaultIcon = (type, isColored) => {
   let color;
   switch (type) {
     case TOAST_TYPES.SUCCESS:
       color = "#00ff00";
-      return <SuccessIcon color={color} />;
+      return <SuccessIcon color={color} isColored={isColored} />;
     case TOAST_TYPES.ERROR:
       color = "#ff0000";
-      return <ErrorIcon color={color} />;
+      return <ErrorIcon color={color} isColored={isColored} />;
     case TOAST_TYPES.WARNING:
       color = "#ffff00";
-      return <WarningIcon color={color} />;
+      return <WarningIcon color={color} isColored={isColored} />;
     case TOAST_TYPES.INFO:
       color = "#00ffff";
-      return <InfoIcon color={color} />;
+      return <InfoIcon color={color} isColored={isColored} />;
     default:
       return null;
   }
@@ -474,7 +474,7 @@ function ToastItem({
         className={`react-toastified-message`}
         style={{ position: "relative", zIndex: 2 }}
       >
-        {toast.icon || getDefaultIcon(toast.type)}
+        {toast.icon || getDefaultIcon(toast.type, toast.theme === "colored")}
         {toast.message}
       </div>
       <div className="toast-close-button-wrapper">
@@ -700,7 +700,7 @@ function CloseIcon({ color }) {
   );
 }
 
-function SuccessIcon({ color }) {
+function SuccessIcon({ color, isColored }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -711,7 +711,7 @@ function SuccessIcon({ color }) {
       height={20}
       // stroke="currentColor"
       className="size-6"
-      stroke={color}
+      stroke={isColored ? `currentColor` : color}
       fill={`none`}
       shapeRendering="geometricPrecision"
     >
@@ -724,11 +724,11 @@ function SuccessIcon({ color }) {
   );
 }
 
-function ErrorIcon({ color }) {
+function ErrorIcon({ color, isColored }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      stroke={color}
+      stroke={isColored ? `currentColor` : color}
       fill={`none`}
       //  stroke="currentColor"
       // fill={color}
@@ -768,7 +768,7 @@ function ErrorIcon({ color }) {
 //     </svg>
 //   );
 // }
-function WarningIcon({ color }) {
+function WarningIcon({ color, isColored }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -776,7 +776,7 @@ function WarningIcon({ color }) {
       strokeWidth={1}
       width={20}
       height={20}
-      stroke={color}
+      stroke={isColored ? `currentColor` : color}
       fill={`none`}
       className="size-6"
       shapeRendering="geometricPrecision"
@@ -791,12 +791,12 @@ function WarningIcon({ color }) {
   );
 }
 
-function InfoIcon({ color }) {
+function InfoIcon({ color, isColored }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       // fill={color}
-      stroke={color}
+      stroke={isColored ? `currentColor` : color}
       fill={`none`}
       viewBox="0 0 24 24"
       strokeWidth={1.5}

@@ -89,7 +89,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 5px;
   border-radius: 12px;
   min-height: 63px;
   font-size: 1rem;
@@ -404,7 +404,7 @@ body {
 
 /* Warning - Primary */
 .toast-warning {
-  background-color: #ffc107;
+  background-color: #ffb907;
 }
 
 /* Info - Primary */
@@ -423,7 +423,7 @@ body {
 }
 
 .toast-warning-colored {
-  background-color: #ffff00;
+  background-color: #ffb907;
   color: black;
 }
 

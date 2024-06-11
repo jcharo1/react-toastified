@@ -74,7 +74,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
+  padding: 5px;
   border-radius: 12px;
   min-height: 63px;
   font-size: 1rem;
@@ -173,8 +173,14 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 4px;
+  height: 7px;
   z-index: 1;
+}
+.progress-bar-white {
+  background-color: white;
+}
+.progress-bar-black {
+  background-color: black;
 }
 
 .toast-container.bottom-right {
@@ -225,14 +231,27 @@
     transform: translateX(100%);
   }
 }
-
+.react-toastified-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
 .toast-center-button {
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
+  align-items: start;
 
+  /* flex-direction: column; */
+}
+.toast-close-button-wrapper {
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  height: 100%;
+  align-self: start;
+  /* flex-direction: column; */
+}
 .toast-container.top-center {
   top: 20px;
   left: 50%;
@@ -353,42 +372,43 @@
   z-index: 1;
   transform: translateY(260%) scale(1);
 }
-
+/* Default - Primary */
 .toast-default {
-  background-color: #555555;
+  background-color: #007bff;
 }
 
-/* Success - Original */
+/* Success - Primary */
 .toast-success {
-  background-color: #00ffaa;
+  background-color: #28a745;
 }
 
-/* Error - Original */
+/* Error - Primary */
 .toast-error {
-  background-color: #ff4560;
+  background-color: #dc3545;
 }
 
-/* Warning - Original */
+/* Warning - Primary */
 .toast-warning {
-  background-color: #ffaa44;
+  background-color: #ffb907;
 }
 
-/* Info - Original */
+/* Info - Primary */
 .toast-info {
-  background-color: #00ffff;
+  background-color: #17a2b8;
 }
+
 .toast-success-colored {
-  background-color: #00ffaa;
+  background-color: #00ff00;
   color: black;
 }
 
 .toast-error-colored {
-  background-color: #ff4560;
+  background-color: #ff0000;
   color: black;
 }
 
 .toast-warning-colored {
-  background-color: #ffaa44;
+  background-color: #ffb907;
   color: black;
 }
 

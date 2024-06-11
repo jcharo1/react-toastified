@@ -1,6 +1,6 @@
 {
   "name": "react-toastified",
-  "version": "3.0.15",
+  "version": "3.0.16",
   "description": "An easy-to-use, customizable toast notification system for React apps",
   "main": "./npm-package/components/ToastProvider.min.js",
   "scripts": {
